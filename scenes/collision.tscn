@@ -1,0 +1,2134 @@
+[gd_scene load_steps=16 format=3 uid="uid://j0ea4doqqtxd"]
+
+[ext_resource type="Script" uid="uid://bqglwni5xl8v1" path="res://scripts/SDF/scene.gd" id="1_f46lh"]
+[ext_resource type="Material" uid="uid://dxey0qh001goj" path="res://graphics/materials/ground.tres" id="2_3bl6y"]
+[ext_resource type="Script" uid="uid://emm41wxv27du" path="res://scripts/SDF/block.gd" id="2_f46lh"]
+[ext_resource type="Material" uid="uid://dakxtjrimr408" path="res://graphics/materials/agent.tres" id="2_gsf2h"]
+[ext_resource type="Script" uid="uid://dr4wof7xlptgj" path="res://scripts/misc/camera.gd" id="2_udo1c"]
+[ext_resource type="Script" uid="uid://c4mdewu0a2jpu" path="res://scripts/agent.gd" id="2_yg52f"]
+[ext_resource type="ArrayMesh" uid="uid://dr6pbvojmu42o" path="res://graphics/3D/primitives_Icosphere.res" id="3_it4xe"]
+[ext_resource type="Script" uid="uid://b6ni830i2u1n4" path="res://scripts/agents.gd" id="4_18lml"]
+[ext_resource type="PackedScene" uid="uid://dj7knkh6tmd8e" path="res://scenes/prefabs/bot.tscn" id="4_vupmq"]
+[ext_resource type="Material" uid="uid://bqlvat45p3v3h" path="res://graphics/materials/wall.tres" id="5_pgl50"]
+[ext_resource type="ArrayMesh" uid="uid://cddvql0wi3a8j" path="res://graphics/3D/primitives_Cube.res" id="6_wbxn8"]
+[ext_resource type="ArrayMesh" uid="uid://pliqi1c2yjli" path="res://graphics/3D/primitives_Cone.res" id="9_wptyw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh4ww"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_otxme"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h5yh3"]
+resource_name = "primitives_Plane"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_dh4ww"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_otxme")
+
+[node name="Collision-World" type="Node3D"]
+
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 31.66419, 16, 10)
+fov = 15.0
+size = 21.134
+far = 500.0
+script = ExtResource("2_udo1c")
+target = NodePath("../Agents/Player")
+speed = 6.0
+offset = Vector3(0, 60, 32)
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0.0343673, 0, 0)
+mesh = SubResource("ArrayMesh_h5yh3")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_3bl6y")
+metadata/_edit_lock_ = true
+
+[node name="Agents" type="Node3D" parent="."]
+script = ExtResource("4_18lml")
+cell_size = 1
+
+[node name="Bot" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.138729, 0, -4.2902346)
+
+[node name="Bot2" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.138729, 0, -3.2902346)
+
+[node name="Bot3" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.638729, 0, -1.2902346)
+
+[node name="Bot4" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8612709, 0, -2.2902346)
+
+[node name="Bot5" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -8.324308)
+
+[node name="Bot6" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -7.3243084)
+
+[node name="Bot7" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -6.3243084)
+
+[node name="Bot8" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -5.3243084)
+
+[node name="Bot9" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -5.3243084)
+
+[node name="Bot10" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -6.3243084)
+
+[node name="Bot11" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -7.3243084)
+
+[node name="Bot12" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -8.324308)
+
+[node name="Bot69" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -12.824308)
+
+[node name="Bot70" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -11.824308)
+
+[node name="Bot71" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -10.824308)
+
+[node name="Bot72" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -9.824308)
+
+[node name="Bot73" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -9.824308)
+
+[node name="Bot74" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -10.824308)
+
+[node name="Bot75" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -11.824308)
+
+[node name="Bot76" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -12.824308)
+
+[node name="Bot77" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -18.824308)
+
+[node name="Bot78" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -17.824308)
+
+[node name="Bot79" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -16.824308)
+
+[node name="Bot80" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -15.824308)
+
+[node name="Bot81" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -15.824308)
+
+[node name="Bot82" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -16.824308)
+
+[node name="Bot83" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -17.824308)
+
+[node name="Bot84" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -18.824308)
+
+[node name="Bot85" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -14.824308)
+
+[node name="Bot86" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -13.824308)
+
+[node name="Bot87" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -12.824308)
+
+[node name="Bot88" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -11.824308)
+
+[node name="Bot89" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -11.824308)
+
+[node name="Bot90" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -12.824308)
+
+[node name="Bot91" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -13.824308)
+
+[node name="Bot92" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -14.824308)
+
+[node name="Bot93" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -10.824308)
+
+[node name="Bot94" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -9.824308)
+
+[node name="Bot95" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -8.824308)
+
+[node name="Bot96" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -7.8243084)
+
+[node name="Bot97" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -7.8243084)
+
+[node name="Bot98" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -8.824308)
+
+[node name="Bot99" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -9.824308)
+
+[node name="Bot100" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -10.824308)
+
+[node name="Bot101" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -6.8243084)
+
+[node name="Bot102" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -5.8243084)
+
+[node name="Bot103" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -4.8243084)
+
+[node name="Bot104" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -3.8243084)
+
+[node name="Bot105" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -3.8243084)
+
+[node name="Bot106" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -4.8243084)
+
+[node name="Bot107" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -5.8243084)
+
+[node name="Bot108" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -6.8243084)
+
+[node name="Bot109" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -2.8243084)
+
+[node name="Bot110" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -1.8243084)
+
+[node name="Bot111" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -0.8243084)
+
+[node name="Bot112" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, 0.1756916)
+
+[node name="Bot113" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, 0.1756916)
+
+[node name="Bot114" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -0.8243084)
+
+[node name="Bot115" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -1.8243084)
+
+[node name="Bot116" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -2.8243084)
+
+[node name="Bot13" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -13.324308)
+
+[node name="Bot14" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -12.324308)
+
+[node name="Bot15" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -11.324308)
+
+[node name="Bot16" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -10.324308)
+
+[node name="Bot17" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -10.324308)
+
+[node name="Bot18" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -11.324308)
+
+[node name="Bot19" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -12.324308)
+
+[node name="Bot20" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -13.324308)
+
+[node name="Bot21" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -9.324308)
+
+[node name="Bot22" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -8.324308)
+
+[node name="Bot23" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -7.3243084)
+
+[node name="Bot24" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -6.3243084)
+
+[node name="Bot25" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -6.3243084)
+
+[node name="Bot26" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -7.3243084)
+
+[node name="Bot27" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -8.324308)
+
+[node name="Bot28" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -9.324308)
+
+[node name="Bot29" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 6.1756916)
+
+[node name="Bot30" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 7.1756916)
+
+[node name="Bot31" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 8.175692)
+
+[node name="Bot32" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 9.175692)
+
+[node name="Bot33" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 9.175692)
+
+[node name="Bot34" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 8.175692)
+
+[node name="Bot35" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 7.1756916)
+
+[node name="Bot36" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 6.1756916)
+
+[node name="Bot37" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -13.324308)
+
+[node name="Bot38" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -12.324308)
+
+[node name="Bot39" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -11.324308)
+
+[node name="Bot40" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -10.324308)
+
+[node name="Bot41" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -10.324308)
+
+[node name="Bot42" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -11.324308)
+
+[node name="Bot43" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -12.324308)
+
+[node name="Bot44" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -13.324308)
+
+[node name="Bot45" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -4.3243084)
+
+[node name="Bot46" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -3.3243084)
+
+[node name="Bot47" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -2.3243084)
+
+[node name="Bot48" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -1.3243084)
+
+[node name="Bot49" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -1.3243084)
+
+[node name="Bot50" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -2.3243084)
+
+[node name="Bot51" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -3.3243084)
+
+[node name="Bot52" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -4.3243084)
+
+[node name="Bot53" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -15.824308)
+
+[node name="Bot54" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -14.824308)
+
+[node name="Bot55" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -13.824308)
+
+[node name="Bot56" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -12.824308)
+
+[node name="Bot57" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -12.824308)
+
+[node name="Bot58" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -13.824308)
+
+[node name="Bot59" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -14.824308)
+
+[node name="Bot60" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -15.824308)
+
+[node name="Bot61" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 8.175692)
+
+[node name="Bot62" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 9.175692)
+
+[node name="Bot63" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 10.175692)
+
+[node name="Bot64" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 11.175692)
+
+[node name="Bot65" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 11.175692)
+
+[node name="Bot66" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 10.175692)
+
+[node name="Bot67" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 9.175692)
+
+[node name="Bot68" parent="Agents" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 8.175692)
+
+[node name="Player" type="MeshInstance3D" parent="Agents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7195034, 0, 3.951992)
+mesh = ExtResource("3_it4xe")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_gsf2h")
+script = ExtResource("2_yg52f")
+radius = 0.5
+speed = 50.0
+is_rendered = true
+
+[node name="Maze" type="Node3D" parent="."]
+script = ExtResource("1_f46lh")
+cell_size = 3
+
+[node name="Cone" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(4, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 0)
+mesh = ExtResource("9_wptyw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+inset = 0.1
+
+[node name="Wall89" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall90" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall91" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall92" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall191" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall192" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall193" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall165" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall166" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall186" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall167" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall168" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall187" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall188" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall169" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall177" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall197" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall147" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall203" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall174" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall175" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall148" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall149" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall198" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall199" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall223" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall200" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall150" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall398" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall399" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall400" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall401" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall402" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall405" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 5, 6, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall408" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall409" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall410" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall411" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall412" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall413" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall414" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall415" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall416" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall417" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall418" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall419" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall420" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall421" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall422" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall423" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall424" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall425" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall426" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall427" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall428" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall429" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall430" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall431" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall432" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall433" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall434" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 17)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall435" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall436" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall437" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall438" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall439" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall440" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall441" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall442" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall444" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, 17, 0, -16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall448" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall449" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 19)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall450" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 17)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall451" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall452" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall453" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall454" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 19)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall455" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 17)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall456" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall457" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall458" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall459" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall460" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall461" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall462" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall463" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 17)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall464" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall465" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall466" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall467" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall468" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall469" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall470" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall471" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall472" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall151" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall105" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall213" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall218" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall106" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall107" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall178" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall179" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall108" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall206" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall225" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall207" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall208" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall209" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall109" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall156" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall157" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall158" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall110" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall112" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall113" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall114" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall115" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall116" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall117" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall118" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall85" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, 3, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall205" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall374" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall23" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(41, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall24" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(41, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall140" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall141" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall287" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 39, 20, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall288" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 39, -20, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall119" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall221" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall222" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall120" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall121" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall124" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall125" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall350" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall351" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall352" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall353" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall354" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall355" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall356" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall357" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall358" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall359" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall360" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall361" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall362" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall363" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall364" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall365" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall366" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall367" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall368" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall369" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall370" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall371" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall372" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall373" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall379" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(3.2749655, 0, 0.5741625, 0, 1, 0, -2.29665, 0, 0.8187414, 11.009569, 0, -14.134405)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall403" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(3.2749655, 0, 0.5741625, 0, 1, 0, -2.29665, 0, 0.8187414, 12.444975, 0, -12.087551)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall380" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall381" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall382" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall383" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall384" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall385" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall386" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall387" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall388" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall389" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall390" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall391" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall392" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall393" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall394" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall395" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall396" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall397" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall215" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall217" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall224" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall216" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall210" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall211" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall212" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall128" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall129" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall219" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall180" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall181" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall130" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall182" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall183" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall220" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall184" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall185" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall131" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall132" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall133" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall134" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall176" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall135" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall136" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall137" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall138" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall139" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall189" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall190" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall170" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall171" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall172" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall173" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall152" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall153" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall154" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall155" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall194" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall195" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall196" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall144" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall201" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall202" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall93" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall94" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall95" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall96" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall97" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall161" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall162" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall163" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall164" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 4)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall142" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall98" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall204" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall99" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall100" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall102" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall159" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall160" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")

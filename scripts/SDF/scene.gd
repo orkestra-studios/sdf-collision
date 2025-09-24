@@ -1,0 +1,82 @@
+class_name SDFScene extends Node3D
+
+static var Main : SDFScene
+
+@export var cell_size : int = 4
+var grid : Dictionary[Vector2i, SDFCell]
+
+func _ready() -> void:
+	# singleton instance
+	if Main != null:
+		self.free()
+		return
+	Main = self
+	
+	grid = {}
+	load_elements()
+	
+func distance(to : Vector2) -> SDF.Query: 
+	var idx : Vector2i = _cell_index(to)
+	var proximity : SDFCell = SDFCell.new()
+	var bias : Vector2 = to - Vector2(idx * cell_size)
+	var treshold : float = 0.25
+	
+	proximity.setup()
+	proximity.merge(grid.get(idx))
+	
+	#edges
+	if bias.x > treshold: proximity.merge(grid.get(idx+Vector2i.RIGHT))
+	if bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.DOWN))
+	if bias.x < -treshold: proximity.merge(grid.get(idx+Vector2i.LEFT))
+	if bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.UP))
+	#corners
+	if bias.x > treshold and bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.RIGHT+Vector2i.DOWN))
+	if bias.x > treshold and bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.RIGHT+Vector2i.UP))
+	if bias.x < -treshold and bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.LEFT+Vector2i.DOWN))
+	if bias.x < -treshold and bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.LEFT+Vector2i.UP))
+	
+	var result = proximity.distance(to)
+		
+	return result
+
+func load_elements():
+	for child in get_children():
+		if child is not SDFElement: continue
+		var element = child as SDFElement
+		
+		element.setup()
+		var bounds : Rect2    = element.bounds()
+		var start  : Vector2i = _cell_index(bounds.position)
+		var end    : Vector2i = _cell_index(bounds.position + bounds.size)
+		
+		for x in range(start.x, end.x+1):
+			for y in range(start.y, end.y+1):
+				var idx : Vector2i = Vector2i(x, y)
+				if idx not in grid:
+					grid[idx] = SDFCell.new()
+					grid[idx].location = Vector2(idx * cell_size)
+					grid[idx].setup()
+				grid[idx].insert(element)
+				
+func _cell_index(p: Vector2) -> Vector2i:
+	return Vector2i(round(p.x / cell_size), round(p.y / cell_size))
+
+class SDFCell extends Structure:
+	
+	var location : Vector2
+	
+	func setup():
+		elements = {}
+		var cell_size = 1.0 * SDFScene.Main.cell_size
+		var size = Vector2(cell_size, cell_size)
+		aabb = Rect2(location - size * 0.5, size)
+		
+	func insert(element : SDFElement): elements.set(element, true)
+	
+	func merge(other : SDFCell):
+		if other == null: return
+		elements.merge(other.elements)
+		aabb = aabb.merge(other.aabb)
+		
+	func _debug_draw(c : Color) -> void:
+		super._debug_draw(c)
