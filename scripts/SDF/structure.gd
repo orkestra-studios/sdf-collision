@@ -18,12 +18,12 @@ func setup():
 			count += 1
 	print("added ", count, " elements")
 
-func distance(to : Vector2) -> SDF.Query:
+func query(to : Vector2) -> SDF.Query:
 	result.distance = INF
 	result.element = null
 	result.count = 0
 	for e in elements:
-		var check = e.distance(to)
+		var check = e.query(to)
 		result.count += check.count
 		if check.distance < result.distance:
 			result.element = e

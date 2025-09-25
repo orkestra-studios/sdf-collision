@@ -1,7 +1,6 @@
-class_name Agent extends Node3D
+class_name Agent extends Entity
 
 @export_subgroup("Parameters")
-@export var radius: float = 1.0
 @export var speed: float = 5.0
 @export var is_rendered : bool = false
 
@@ -9,10 +8,12 @@ var query : SDF.Query
 
 var current : Cell
 var neighbors : Array[Cell] = []
-var location : Vector2 : set = _set_location, get = _get_location
 
 var frame_count: int = 0
 var frame_thortle = 5 + randi() % 55
+
+signal on_sdf_collision(other : SDFElement)
+signal on_dynamic_collision(other : Entity)
 
 func _physics_process(delta: float) -> void:
 	
@@ -21,8 +22,8 @@ func _physics_process(delta: float) -> void:
 		
 		var input = get_input()
 		var dx = speed * delta * input
-		dx = apply_dynamic_collision(dx, 0.2)
 		dx = apply_sdf_collision(dx)
+		dx = apply_dynamic_collision(dx, 0.2)
 		
 		move(dx)
 		update_cell()
@@ -41,27 +42,32 @@ func move(direction : Vector2):
 	
 func apply_sdf_collision(dx : Vector2) -> Vector2:
 	var loc = location
-	query = SDFScene.Main.distance(loc + dx);
 	#debug_sdf()
+	query = SDFScene.Main.query(loc + dx);
 	var diff = query.distance - radius
 	if diff < 0:
-		var hitNormal = sdf_normal(loc, query.element)
+		var hitNormal = SDF.normal(loc, query.element)
 		var correction : Vector2 = -diff * hitNormal
 		#print("inside: %.2f * (%.2f, %.2f)"%[diff, hitNormal.x, hitNormal.y])
 		dx = dx + correction
+		on_sdf_collision.emit(query.element)
 	return dx
 	
 func apply_dynamic_collision(dx : Vector2, inset : float = 0) -> Vector2:
 	if current == null: return dx
 	var loc = location
 	for cell in neighbors:
-		for element in cell.elements:
-			if element is not Agent: continue
-			var agent = element as Agent
-			var diff = loc - agent.location
-			var dist = diff.length() - (radius + agent.radius - inset)
+		cell.debug_draw(Color.ORCHID)
+		for e in cell.entities:
+			if e is not Entity: continue
+			var entity = e as Entity
+			var diff = loc - entity.location
+			var dist = diff.length() - (radius + entity.radius - inset)
 			#debug_line(global_position, agent.global_position, Color.ORCHID)
-			if dist <= 0: dx -= diff.normalized() * dist
+			if dist <= 0:
+				dx -= diff.normalized() * dist
+				on_dynamic_collision.emit(entity)
+	current.debug_draw(Color.DARK_ORCHID)
 	return dx
 	
 func update_cell():
@@ -73,32 +79,23 @@ func update_cell():
 	neighbors = [
 		current,
 		AgentsManager.get_neighbor_cell(location, Vector2i.RIGHT),
-		AgentsManager.get_neighbor_cell(location, Vector2i.RIGHT + Vector2i.DOWN),
+		AgentsManager.get_neighbor_cell(location, Vector2i(1, -1)),
 		AgentsManager.get_neighbor_cell(location, Vector2i.DOWN),
-		AgentsManager.get_neighbor_cell(location, Vector2i.DOWN + Vector2i.LEFT),
+		AgentsManager.get_neighbor_cell(location, Vector2i(-1, -1)),
 		AgentsManager.get_neighbor_cell(location, Vector2i.LEFT),
-		AgentsManager.get_neighbor_cell(location, Vector2i.LEFT + Vector2i.UP),
+		AgentsManager.get_neighbor_cell(location, Vector2i(-1, 1)),
 		AgentsManager.get_neighbor_cell(location, Vector2i.UP),
-		AgentsManager.get_neighbor_cell(location, Vector2i.UP + Vector2i.RIGHT)
+		AgentsManager.get_neighbor_cell(location, Vector2i(1, 1))
 	]
-	
-func _get_location() -> Vector2: return Vectors.XZ(global_position)
-func _set_location(loc : Vector2): global_position = Vectors.X_Z(loc)
 
 func _on_enter_screen(): is_rendered = true
 func _on_exit_screen(): is_rendered = false
-
-func sdf_normal(pos: Vector2, element : SDFElement, eps: float = 0.01) -> Vector2:
-	var dx = element.distance(pos + Vector2(eps, 0)).distance - element.distance(pos - Vector2(eps, 0)).distance
-	var dy = element.distance(pos + Vector2(0, eps)).distance - element.distance(pos - Vector2(0, eps)).distance
-	var n = Vector2(dx, dy)
-	return n.normalized()
 	
 func debug_sdf():
 	if not is_rendered: return
 	if query != null and query.distance != INF:
 		query.element._debug_draw(Color.ROYAL_BLUE)
-		var closest_point = Vectors.X_Z(location - query.distance * sdf_normal(location, query.element))
+		var closest_point = Vectors.X_Z(location - query.distance * SDF.normal(location, query.element))
 		debug_line(global_position, closest_point, Color.ROYAL_BLUE)
 		var midpoint = (global_position + query.element.position) / 2
 		DebugDraw3D.draw_text(midpoint+1.5*Vector3.UP, "%.2f" % query.distance, 72, Color.ROYAL_BLUE)

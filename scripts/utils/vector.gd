@@ -20,4 +20,6 @@ static func X__(a:float) -> Vector3: return Vector3(a,0,0)
 static func _Y_(a:float) -> Vector3: return Vector3(0,a,0)
 static func __Z(a:float) -> Vector3: return Vector3(0,0,a)
 
+const FLAT : Vector3 = Vector3(1,0,1)
+
 #TODO: swizzling

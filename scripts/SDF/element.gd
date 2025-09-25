@@ -8,7 +8,7 @@ func setup() -> void
 func bounds() -> Rect2
 
 @abstract
-func distance(to : Vector2) -> SDF.Query
+func query(to : Vector2) -> SDF.Query
 
 @abstract
 func _debug_draw(c : Color) -> void

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://j0ea4doqqtxd"]
+[gd_scene load_steps=19 format=4 uid="uid://j0ea4doqqtxd"]
 
 [ext_resource type="Script" uid="uid://bqglwni5xl8v1" path="res://scripts/SDF/scene.gd" id="1_f46lh"]
 [ext_resource type="Material" uid="uid://dxey0qh001goj" path="res://graphics/materials/ground.tres" id="2_3bl6y"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dj7knkh6tmd8e" path="res://scenes/prefabs/bot.tscn" id="4_vupmq"]
 [ext_resource type="Material" uid="uid://bqlvat45p3v3h" path="res://graphics/materials/wall.tres" id="5_pgl50"]
 [ext_resource type="ArrayMesh" uid="uid://cddvql0wi3a8j" path="res://graphics/3D/primitives_Cube.res" id="6_wbxn8"]
+[ext_resource type="Material" uid="uid://d2xxf3ymf7adb" path="res://graphics/materials/outline.tres" id="8_18lml"]
 [ext_resource type="ArrayMesh" uid="uid://pliqi1c2yjli" path="res://graphics/3D/primitives_Cone.res" id="9_wptyw"]
+[ext_resource type="ArrayMesh" uid="uid://3gl5jpt21m73" path="res://graphics/3D/primitives_Cylinder.res" id="14_m5j8t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh4ww"]
 
@@ -20,11 +22,11 @@ _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
 "format": 34896613377,
 "index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAP//AAD//wAAAAAAAAAAAAA=")
 }]
 blend_shape_mode = 0
 
@@ -32,18 +34,31 @@ blend_shape_mode = 0
 resource_name = "primitives_Plane"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
-"attribute_data": PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAA=="),
 "format": 34896613399,
 "index_count": 6,
-"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
 "material": SubResource("StandardMaterial3D_dh4ww"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 4,
-"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+"vertex_data": PackedByteArray("AAAAAP///7///wAAAAD/v///AAD///+/AAAAAAAA/7////9/////f////3////9/")
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_otxme")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vupmq"]
+_surfaces = [{
+"aabb": AABB(-0.5489642, -0.048357222, -0.5483659, 1.0984511, 1.0967418, 1.0967505),
+"attribute_data": PackedByteArray("ui06PwAAgD+j6CI/2K9XP9FzUT/Yr1c/0XNRP4cRBz/puWg/AACAP7otOj+vYC8/jKILP69gLz+j6CI/hxEHP+m46D7Yr1c/jKILPwAAgD+6LLo+r2AvP+m46D6HEQc/jKKLPtivVz+6LLo+AACAP7osOj6vYC8/jKKLPocRBz+6LDo+AACAP7oouj2HEQc/uiy6PtivVz+j6KI+xIhDP9Fy0T7EiEM/uii6PdivVz8AAAAAr2AvPwD//z7EiEM/xtBFP8SIQz/puWg/r2AvP90WXT/EiEM/AACAP9ivVz+MoAs+7NdrP+m4aD7s12s/uiw6PtivVz+MoAs+xIhDP7ogOj3EiEM/6bhoPsSIQz+6KLo9r2AvP7ogOj2bORs/jKALPps5Gz+Moos+r2AvP+m4aD6bORs/o+iiPps5Gz+j6KI+7NdrP9Fy0T7s12s/6bjoPq9gLz/RctE+mzkbPwD//z6bORs/jKILP9ivVz8A//8+7NdrP5dFFz/s12s/l0UXP8SIQz+j6CI/r2AvP5dFFz+bORs/r4ouP5s5Gz+vii4/xIhDP7otOj/Yr1c/r4ouP+zXaz/G0EU/7NdrP9FzUT+vYC8/xtBFP5s5Gz/dFl0/mzkbP/RcdD/EiEM/6bloP9ivVz/dFl0/7NdrP/RcdD/s12s/"),
+"format": 34359742487,
+"index_count": 240,
+"index_data": PackedByteArray("EAAdABwAHAAdAB4AHAAeABUAHQAMAB4AFQAeAB8AFQAfACAAHgAMACEAHwAeACEAIAAfACIAIAAiABYAFgAiACMAIwAiACQAIwAkABEAIgAOACQAHwAOACIAHwAhAA4AIQAlAA4ADgAlACYAJgAlACcAJgAnAA8AJQAKACcAIQATACUAEwAKACUADAATACEADAASABMADAAoABIAEgAoACkAKAANACkAEgApAAgAEwASABQAEgAIABQAEwAUAAoAFAAqAAoACgAqACsAKwAqACwAKwAsAAsAKgAGACwAFAAXACoAFwAGACoACAAXABQACAAtABcALgAtAAgALgAvAC0ACQAvAC4ALwABAC0AFwAtADAALQABADAAFwAwAAYAMAAxAAYABgAxADIAMgAxADMAMgAzAAcAMQAFADMAMAA0ADEANAAFADEAAQA0ADAAAQA1ADQANgA1AAEANgA3ADUAAAA3ADYANwACADUANAA1ABgANQACABgANAAYAAUAGAA4AAUABQA4ADkAOQA4ADoAOQA6AAMAOAAZADoAGAAaADgAGgAZADgAAgAaABgAGgA7ABkAAgA8ABoAGgA8ADsAPAAbADsAPQA8AAIAPgAbADwAPQA+ADwABAA+AD0A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 63,
+"vertex_data": PackedByteArray("2xW0OzkSRr1ymzs8ciUYvnd7fD7aQO6+C0kCvzfrez4FuBS8ZTEHu3cxhj9TqUs82xW0OzkSRr1ymzs8nuTPvmDuQD9YUJa+njEpPqLsQD9Dh+u+ZTEHu3cxhj9TqUs8NFXVPvXvez4K8o6+2xW0OzkSRr1ymzs8AEgCP0EEQT8hdxQ8ZTEHu3cxhj9TqUs8iuLPPl5CfD5YTpY+2xW0OzkSRr1ymzs8lyEYPifgQD/RPu4+ZTEHu3cxhj9TqUs82xW0OzkSRr1ymzs8ZTEHu3cxhj9TqUs8dDj7PuCDXD5ZKkE8UcQKP4hzAT+CVTk+LKsMPxIB/T5+zCK+lSUYvmN7fD7RPu4+bNnQvm9oPj99UZk++SSxPhGJAT9KEuC+WsQKv/AW/T5FWTm+bNnQvm9oPj99UZk+64gMvyYpAj/QMSQ+lSUYvmN7fD7RPu4+lcuovZ4j6zx/9ok+kLVtPsCb6jygNzA+/EgWPm2jTT7VJeA+BauvutyT+T7uYgw/BUSnvm9u/j44AOc+HymrPlmq+T4YQ+Q+7PMdvvwTRz/hIuY+5Sl7vlwudj87iTk+ZnamPRZEdz+E0Y4+TYrHPqO+SD8YOpI+ZnamPRZEdz+E0Y4+h5KaPrxldz87wFA8kLVtPsCb6jygNzA+sdKAPh9zCT1igiO+O6fOPj7KSD/nv4i+h5KaPrxldz87wFA81oDXPUZTdz9QyIq+lu8lPiZ7XT6m6+K+sdKAPh9zCT1igiO+V36mvWOuCz14046+gV43PCj0/D61YQy/2gMQvlmZSD8gX+a+1oDXPUZTdz9QyIq+1YVyvqFPdz+7pzi+CJ6nvtt4AT+xvea+S4zHvnIBXT4ZPJK+V36mvWOuCz14046+epSavgiUCT1HAFG8kTr7vuzdSD+OakG81YVyvqFPdz+7pzi+5Sl7vlwudj87iTk+BUSnvm9u/j44AOc+orDOvnb0Xz7nWYo+epSavgiUCT1HAFG8lcuovZ4j6zx/9ok+AoAFAJBI/7+dJLsVwB7cv9ErLlQCgP6//n/6//1//b8BgAQAb7cAwFMiqcoySTPAYdtD6kIAoLD8f/n/OR79v63dVTVqAJnkBIABAAAA4rAu1M+r/v8AgP9//f8AAEfkVLWtXZb/ZpsFgAMA/P/+/7mVnKS7/17P/3/8//3/R+QCgAQA/f8bzwCA+//G4f6/8831Tf3//v+m3/V/cfuUj/b/qV+OBGrwRWphW4jbp7erSlKivrXAyvH/X8sjBHSkCwBXoNZgRsKrSlGip6oruFggCYApn7i9RWphW+DHCsu6crw3XeiorluhjDp267PcV5SaVeH/Oc//f/9/UvoovV9L8n/oyBLCnrQNgNr7ituna2SqjOENwKRec8WXxkLKRY1ByFDdLrQqstqn0v+Sm0WNQchL7IPjqK9V0L3q6pFboYo6LuhHiIu6WyHTF7f3I9jTzS8AbOSnr1XQQhUU7r63tvKyE3ucmtVYFB0AxbCKulshhxRLo0BIRg2jF1bR+//+/6wF1cJmKqbrdR7vv7u3uPKsIs/LdkWj3mg5urUOAJ80FjfsvdwnKzLaSBbAQUhGDQpHJbZZUKgvK1ygygwyCrIAgP2/dkWk3m9v58ulXnPFj5AVtGFL8n/syA/C1U0kWCa36L9XUKgv1qNetbpyvDf2uNnJ")
+}]
 
 [node name="Collision-World" type="Node3D"]
 
@@ -64,9 +79,24 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_3bl6y")
 metadata/_edit_lock_ = true
 
-[node name="Agents" type="Node3D" parent="."]
+[node name="Agents" type="Node3D" parent="." node_paths=PackedStringArray("flow_target")]
 script = ExtResource("4_18lml")
 cell_size = 1
+flow_target = NodePath("Player")
+
+[node name="Player" type="MeshInstance3D" parent="Agents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7195034, 0, 3.951992)
+mesh = ExtResource("3_it4xe")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_gsf2h")
+script = ExtResource("2_yg52f")
+speed = 6.0
+is_rendered = true
+radius = 0.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Agents/Player"]
+mesh = SubResource("ArrayMesh_vupmq")
+surface_material_override/0 = ExtResource("8_18lml")
 
 [node name="Bot" parent="Agents" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.138729, 0, -4.2902346)
@@ -416,28 +446,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 9.175692)
 [node name="Bot68" parent="Agents" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 8.175692)
 
-[node name="Player" type="MeshInstance3D" parent="Agents"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7195034, 0, 3.951992)
-mesh = ExtResource("3_it4xe")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_gsf2h")
-script = ExtResource("2_yg52f")
-radius = 0.5
-speed = 50.0
-is_rendered = true
-
 [node name="Maze" type="Node3D" parent="."]
 script = ExtResource("1_f46lh")
 cell_size = 3
-
-[node name="Cone" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(4, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 0)
-mesh = ExtResource("9_wptyw")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-shape = 1
-inset = 0.1
 
 [node name="Wall89" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9)
@@ -865,6 +876,79 @@ mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
+
+[node name="Wall443" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, -17.5, 0, 17)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Wall445" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -15, 0, 17)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Wall446" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.86602527, 0, 0.49999994, 0, 1, 0, -0.49999994, 0, 0.86602527, -15, 0, 14.509459)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Wall447" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -17.5, 0, 14.5)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Wall473" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -12.5, 0, 14.5)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Shrine" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(3.6, 0, 0, 0, 8, 0, 0, 0, 3.6, 0, 0, 0)
+mesh = ExtResource("9_wptyw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+inset = 0.1
+
+[node name="Wall474" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.96592575, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.96592575, -12.5, 0, 17)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Wall475" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -10, 0, 14.5)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
+
+[node name="Wall476" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -10, 0, 17)
+mesh = ExtResource("14_m5j8t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+shape = 1
 
 [node name="Wall435" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 15)

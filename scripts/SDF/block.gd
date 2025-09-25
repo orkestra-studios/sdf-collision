@@ -9,7 +9,7 @@ func setup():
 	var size := Vector2.ONE * Vectors.XZ(scale)
 	aabb = Rect2(Vectors.XZ(global_position) - size * 0.5, size)
 
-func distance(to : Vector2) -> SDF.Query:
+func query(to : Vector2) -> SDF.Query:
 	#var pos = Vectors.XZ(to_local(Vectors.X_Z(to)))
 	var pos = SDF.rotate(SDF.translate(to, Vectors.XZ(global_position)), global_rotation.y)
 	var dist : float = INF

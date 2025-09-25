@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d2xxf3ymf7adb"]
+
+[ext_resource type="Shader" uid="uid://duwdd5gcvp2b" path="res://graphics/materials/shaders/unlit.gdshader" id="1_5hisp"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5hisp")
+shader_parameter/colour = Color(0, 0, 0, 1)
+shader_parameter/shadow = Color(0, 0, 0, 1)
+shader_parameter/light_direction = Vector3(0.25, 4.78, 0)

@@ -15,7 +15,7 @@ func _ready() -> void:
 	grid = {}
 	load_elements()
 	
-func distance(to : Vector2) -> SDF.Query: 
+func query(to : Vector2) -> SDF.Query: 
 	var idx : Vector2i = _cell_index(to)
 	var proximity : SDFCell = SDFCell.new()
 	var bias : Vector2 = to - Vector2(idx * cell_size)
@@ -35,7 +35,7 @@ func distance(to : Vector2) -> SDF.Query:
 	if bias.x < -treshold and bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.LEFT+Vector2i.DOWN))
 	if bias.x < -treshold and bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.LEFT+Vector2i.UP))
 	
-	var result = proximity.distance(to)
+	var result = proximity.query(to)
 		
 	return result
 

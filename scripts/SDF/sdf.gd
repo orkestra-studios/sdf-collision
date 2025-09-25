@@ -30,6 +30,12 @@ static func rotate(position : Vector2, angle : float) -> Vector2:
 
 static func scale(position : Vector2, factor : float) -> Vector2:
 	return position / factor
+	
+static func normal(pos: Vector2, element : SDFElement, eps: float = 0.01) -> Vector2:
+	var dx = element.query(pos + Vector2(eps, 0)).distance - element.query(pos - Vector2(eps, 0)).distance
+	var dy = element.query(pos + Vector2(0, eps)).distance - element.query(pos - Vector2(0, eps)).distance
+	var n = Vector2(dx, dy)
+	return n.normalized()
 
 class Query:
 	
