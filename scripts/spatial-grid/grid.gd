@@ -9,9 +9,9 @@ func _init(size : int):
 
 func get_cell(location : Vector2) -> Cell:
 	var idx = index(location)
-	return get_cell_at(idx)
+	return get_cell_at(idx, true)
 	
-func get_cell_at(idx : Vector2i, create : bool = true) -> Cell:
+func get_cell_at(idx : Vector2i, create : bool = false) -> Cell:
 	if idx not in data: 
 		if create: data[idx] = Cell.new(idx)
 		else: return null

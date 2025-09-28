@@ -15,17 +15,21 @@ var frame_thortle = 5 + randi() % 55
 signal on_sdf_collision(other : SDFElement)
 signal on_dynamic_collision(other : Entity)
 
+var movement : Vector2 = Vector2.ZERO
+var input : Vector2 = Vector2.ZERO
+
 func _physics_process(delta: float) -> void:
 	
 	frame_count = (frame_count + 1) % frame_thortle
-	if is_rendered or frame_count == 0:  #thortling
+	if is_rendered:  #thorttling
 		
-		var input = get_input()
-		var dx = speed * delta * input
-		dx = apply_sdf_collision(dx)
-		dx = apply_dynamic_collision(dx, 0.2)
+		const t = 0.25
+		input = input.lerp(get_input(), t)
+		movement = movement.lerp(speed * delta * input, t)
+		movement = movement.lerp(apply_sdf_collision(movement), t)
+		movement = movement.lerp(apply_dynamic_collision(movement, 0.1), t)
 		
-		move(dx)
+		move(movement)
 		update_cell()
 	
 func get_input() -> Vector2:
@@ -35,21 +39,19 @@ func get_input() -> Vector2:
 	if Input.is_action_pressed("move_left"): input_vec.x -= 1
 	if Input.is_action_pressed("move_right"): input_vec.x += 1
 	return input_vec.limit_length(1)
-
-func move(direction : Vector2):
-	if direction == Vector2.ZERO: return
-	location += direction
 	
 func apply_sdf_collision(dx : Vector2) -> Vector2:
 	var loc = location
 	#debug_sdf()
-	query = SDFScene.Main.query(loc + dx);
+	query = SDFScene.Main.query(loc, dx);
 	var diff = query.distance - radius
 	if diff < 0:
-		var hitNormal = SDF.normal(loc, query.element)
-		var correction : Vector2 = -diff * hitNormal
 		#print("inside: %.2f * (%.2f, %.2f)"%[diff, hitNormal.x, hitNormal.y])
-		dx = dx + correction
+		if diff <= -radius: dx = Vector2.ZERO
+		else:
+			var hitNormal = SDF.normal(loc, query.element)
+			var correction : Vector2 = -diff * hitNormal
+			dx = dx + correction
 		on_sdf_collision.emit(query.element)
 	return dx
 	
@@ -57,7 +59,7 @@ func apply_dynamic_collision(dx : Vector2, inset : float = 0) -> Vector2:
 	if current == null: return dx
 	var loc = location
 	for cell in neighbors:
-		cell.debug_draw(Color.ORCHID)
+		if cell == null: return dx
 		for e in cell.entities:
 			if e is not Entity: continue
 			var entity = e as Entity
@@ -67,7 +69,7 @@ func apply_dynamic_collision(dx : Vector2, inset : float = 0) -> Vector2:
 			if dist <= 0:
 				dx -= diff.normalized() * dist
 				on_dynamic_collision.emit(entity)
-	current.debug_draw(Color.DARK_ORCHID)
+	#current.debug_draw(Color.DARK_ORCHID)
 	return dx
 	
 func update_cell():

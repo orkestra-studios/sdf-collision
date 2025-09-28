@@ -5,6 +5,8 @@ static var Main : SDFScene
 @export var cell_size : int = 4
 var grid : Dictionary[Vector2i, SDFCell]
 
+var proximity : SDFCell = SDFCell.new()
+
 func _ready() -> void:
 	# singleton instance
 	if Main != null:
@@ -15,27 +17,22 @@ func _ready() -> void:
 	grid = {}
 	load_elements()
 	
-func query(to : Vector2) -> SDF.Query: 
+func query(to : Vector2, dx : Vector2 = Vector2.ZERO) -> SDF.Query: 
 	var idx : Vector2i = _cell_index(to)
-	var proximity : SDFCell = SDFCell.new()
-	var bias : Vector2 = to - Vector2(idx * cell_size)
-	var treshold : float = 0.25
 	
+	DebugDraw3D.draw_ray(Vectors.X_Z(to), Vectors.X_Z(dx), dx.length(), Color.RED)
+	
+	# create a temporary cell around the query position
+	proximity.location = idx * cell_size
 	proximity.setup()
 	proximity.merge(grid.get(idx))
 	
-	#edges
-	if bias.x > treshold: proximity.merge(grid.get(idx+Vector2i.RIGHT))
-	if bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.DOWN))
-	if bias.x < -treshold: proximity.merge(grid.get(idx+Vector2i.LEFT))
-	if bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.UP))
-	#corners
-	if bias.x > treshold and bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.RIGHT+Vector2i.DOWN))
-	if bias.x > treshold and bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.RIGHT+Vector2i.UP))
-	if bias.x < -treshold and bias.y > treshold: proximity.merge(grid.get(idx+Vector2i.LEFT+Vector2i.DOWN))
-	if bias.x < -treshold and bias.y < -treshold: proximity.merge(grid.get(idx+Vector2i.LEFT+Vector2i.UP))
+	# add one more cell from movement direction
+	var fwd : Vector2i = _cell_index(to + dx.normalized() * cell_size)
+	proximity.merge(grid.get(fwd))
 	
 	var result = proximity.query(to)
+	proximity._debug_draw(Color.STEEL_BLUE)
 		
 	return result
 
@@ -77,6 +74,7 @@ class SDFCell extends Structure:
 		if other == null: return
 		elements.merge(other.elements)
 		aabb = aabb.merge(other.aabb)
+		#debug_draw(Color.STEEL_BLUE)
 		
-	func _debug_draw(c : Color) -> void:
+	func debug_draw(c : Color) -> void:
 		super._debug_draw(c)

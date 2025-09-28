@@ -68,7 +68,7 @@ fov = 15.0
 size = 21.134
 far = 500.0
 script = ExtResource("2_udo1c")
-target = NodePath("../Agents/Player")
+target = NodePath("../Player")
 speed = 6.0
 offset = Vector3(0, 60, 32)
 
@@ -79,24 +79,24 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_3bl6y")
 metadata/_edit_lock_ = true
 
-[node name="Agents" type="Node3D" parent="." node_paths=PackedStringArray("flow_target")]
-script = ExtResource("4_18lml")
-cell_size = 1
-flow_target = NodePath("Player")
-
-[node name="Player" type="MeshInstance3D" parent="Agents"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7195034, 0, 3.951992)
+[node name="Player" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.449252, 0, 9.638643)
 mesh = ExtResource("3_it4xe")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_gsf2h")
 script = ExtResource("2_yg52f")
-speed = 6.0
 is_rendered = true
 radius = 0.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Agents/Player"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
 mesh = SubResource("ArrayMesh_vupmq")
 surface_material_override/0 = ExtResource("8_18lml")
+
+[node name="Agents" type="Node3D" parent="." node_paths=PackedStringArray("flow_target")]
+visible = false
+script = ExtResource("4_18lml")
+cell_size = 1
+flow_target = NodePath("../Player")
 
 [node name="Bot" parent="Agents" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.138729, 0, -4.2902346)
@@ -418,33 +418,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -13.824308)
 
 [node name="Bot59" parent="Agents" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -14.824308)
-
-[node name="Bot60" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -15.824308)
-
-[node name="Bot61" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 8.175692)
-
-[node name="Bot62" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 9.175692)
-
-[node name="Bot63" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 10.175692)
-
-[node name="Bot64" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.210222, 0, 11.175692)
-
-[node name="Bot65" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 11.175692)
-
-[node name="Bot66" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 10.175692)
-
-[node name="Bot67" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 9.175692)
-
-[node name="Bot68" parent="Agents" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, 8.175692)
 
 [node name="Maze" type="Node3D" parent="."]
 script = ExtResource("1_f46lh")

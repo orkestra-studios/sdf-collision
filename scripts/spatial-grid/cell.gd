@@ -1,4 +1,4 @@
-class_name Cell extends RefCounted
+class_name Cell
 
 var id : Vector2i
 var entities : Dictionary[Entity, bool]
