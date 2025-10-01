@@ -80,7 +80,7 @@ surface_material_override/0 = ExtResource("2_3bl6y")
 metadata/_edit_lock_ = true
 
 [node name="Player" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.449252, 0, 9.638643)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.179816, 0, -7.333971)
 mesh = ExtResource("3_it4xe")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_gsf2h")
@@ -92,332 +92,439 @@ radius = 0.5
 mesh = SubResource("ArrayMesh_vupmq")
 surface_material_override/0 = ExtResource("8_18lml")
 
-[node name="Agents" type="Node3D" parent="." node_paths=PackedStringArray("flow_target")]
-visible = false
+[node name="Enemies" type="Node3D" parent="." node_paths=PackedStringArray("flow_target")]
 script = ExtResource("4_18lml")
 cell_size = 1
+pathfinding_range = 20
 flow_target = NodePath("../Player")
 
-[node name="Bot" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.138729, 0, -4.2902346)
+speed = 3.2
 
-[node name="Bot2" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot2" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.138729, 0, -3.2902346)
+speed = 3.2
 
-[node name="Bot3" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot3" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.638729, 0, -1.2902346)
+speed = 3.2
 
-[node name="Bot4" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot4" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8612709, 0, -2.2902346)
+speed = 3.2
 
-[node name="Bot5" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot5" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -8.324308)
+speed = 3.2
 
-[node name="Bot6" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot6" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -7.3243084)
+speed = 3.2
 
-[node name="Bot7" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot7" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -6.3243084)
+speed = 3.2
 
-[node name="Bot8" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot8" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -5.3243084)
+speed = 3.2
 
-[node name="Bot9" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot9" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -5.3243084)
+speed = 3.2
 
-[node name="Bot10" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot10" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -6.3243084)
+speed = 3.2
 
-[node name="Bot11" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot11" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -7.3243084)
+speed = 3.2
 
-[node name="Bot12" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot12" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -8.324308)
+speed = 3.2
 
-[node name="Bot69" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot69" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -12.824308)
+speed = 3.2
 
-[node name="Bot70" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot70" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -11.824308)
+speed = 3.2
 
-[node name="Bot71" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot71" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -10.824308)
+speed = 3.2
 
-[node name="Bot72" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot72" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -9.824308)
+speed = 3.2
 
-[node name="Bot73" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot73" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -9.824308)
+speed = 3.2
 
-[node name="Bot74" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot74" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -10.824308)
+speed = 3.2
 
-[node name="Bot75" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot75" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -11.824308)
+speed = 3.2
 
-[node name="Bot76" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot76" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -12.824308)
+speed = 3.2
 
-[node name="Bot77" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot77" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -18.824308)
+speed = 3.2
 
-[node name="Bot78" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot78" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -17.824308)
+speed = 3.2
 
-[node name="Bot79" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot79" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -16.824308)
+speed = 3.2
 
-[node name="Bot80" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot80" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -15.824308)
+speed = 3.2
 
-[node name="Bot81" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot81" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -15.824308)
+speed = 3.2
 
-[node name="Bot82" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot82" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -16.824308)
+speed = 3.2
 
-[node name="Bot83" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot83" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -17.824308)
+speed = 3.2
 
-[node name="Bot84" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot84" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -18.824308)
+speed = 3.2
 
-[node name="Bot85" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot85" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -14.824308)
+speed = 3.2
 
-[node name="Bot86" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot86" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -13.824308)
+speed = 3.2
 
-[node name="Bot87" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot87" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -12.824308)
+speed = 3.2
 
-[node name="Bot88" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot88" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -11.824308)
+speed = 3.2
 
-[node name="Bot89" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot89" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -11.824308)
+speed = 3.2
 
-[node name="Bot90" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot90" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -12.824308)
+speed = 3.2
 
-[node name="Bot91" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot91" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -13.824308)
+speed = 3.2
 
-[node name="Bot92" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot92" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -14.824308)
+speed = 3.2
 
-[node name="Bot93" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot93" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -10.824308)
+speed = 3.2
 
-[node name="Bot94" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot94" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -9.824308)
+speed = 3.2
 
-[node name="Bot95" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot95" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -8.824308)
+speed = 3.2
 
-[node name="Bot96" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot96" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -7.8243084)
+speed = 3.2
 
-[node name="Bot97" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot97" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -7.8243084)
+speed = 3.2
 
-[node name="Bot98" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot98" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -8.824308)
+speed = 3.2
 
-[node name="Bot99" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot99" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -9.824308)
+speed = 3.2
 
-[node name="Bot100" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot100" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -10.824308)
+speed = 3.2
 
-[node name="Bot101" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot101" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -6.8243084)
+speed = 3.2
 
-[node name="Bot102" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot102" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -5.8243084)
+speed = 3.2
 
-[node name="Bot103" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot103" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -4.8243084)
+speed = 3.2
 
-[node name="Bot104" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot104" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -3.8243084)
+speed = 3.2
 
-[node name="Bot105" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot105" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -3.8243084)
+speed = 3.2
 
-[node name="Bot106" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot106" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -4.8243084)
+speed = 3.2
 
-[node name="Bot107" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot107" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -5.8243084)
+speed = 3.2
 
-[node name="Bot108" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot108" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -6.8243084)
+speed = 3.2
 
-[node name="Bot109" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot109" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -2.8243084)
+speed = 3.2
 
-[node name="Bot110" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot110" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -1.8243084)
+speed = 3.2
 
-[node name="Bot111" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot111" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -0.8243084)
+speed = 3.2
 
-[node name="Bot112" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot112" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, 0.1756916)
+speed = 3.2
 
-[node name="Bot113" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot113" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, 0.1756916)
+speed = 3.2
 
-[node name="Bot114" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot114" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -0.8243084)
+speed = 3.2
 
-[node name="Bot115" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot115" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -1.8243084)
+speed = 3.2
 
-[node name="Bot116" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot116" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -2.8243084)
+speed = 3.2
 
-[node name="Bot13" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot13" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -13.324308)
+speed = 3.2
 
-[node name="Bot14" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot14" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -12.324308)
+speed = 3.2
 
-[node name="Bot15" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot15" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -11.324308)
+speed = 3.2
 
-[node name="Bot16" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot16" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -10.324308)
+speed = 3.2
 
-[node name="Bot17" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot17" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -10.324308)
+speed = 3.2
 
-[node name="Bot18" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot18" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -11.324308)
+speed = 3.2
 
-[node name="Bot19" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot19" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -12.324308)
+speed = 3.2
 
-[node name="Bot20" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot20" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -13.324308)
+speed = 3.2
 
-[node name="Bot21" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot21" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -9.324308)
+speed = 3.2
 
-[node name="Bot22" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot22" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -8.324308)
+speed = 3.2
 
-[node name="Bot23" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot23" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -7.3243084)
+speed = 3.2
 
-[node name="Bot24" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot24" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -6.3243084)
+speed = 3.2
 
-[node name="Bot25" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot25" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -6.3243084)
+speed = 3.2
 
-[node name="Bot26" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot26" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -7.3243084)
+speed = 3.2
 
-[node name="Bot27" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot27" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -8.324308)
+speed = 3.2
 
-[node name="Bot28" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot28" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -9.324308)
+speed = 3.2
 
-[node name="Bot29" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot29" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 6.1756916)
+speed = 3.2
 
-[node name="Bot30" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot30" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 7.1756916)
+speed = 3.2
 
-[node name="Bot31" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot31" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 8.175692)
+speed = 3.2
 
-[node name="Bot32" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot32" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 9.175692)
+speed = 3.2
 
-[node name="Bot33" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot33" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 9.175692)
+speed = 3.2
 
-[node name="Bot34" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot34" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 8.175692)
+speed = 3.2
 
-[node name="Bot35" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot35" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 7.1756916)
+speed = 3.2
 
-[node name="Bot36" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot36" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 6.1756916)
+speed = 3.2
 
-[node name="Bot37" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot37" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -13.324308)
+speed = 3.2
 
-[node name="Bot38" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot38" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -12.324308)
+speed = 3.2
 
-[node name="Bot39" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot39" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -11.324308)
+speed = 3.2
 
-[node name="Bot40" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot40" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -10.324308)
+speed = 3.2
 
-[node name="Bot41" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot41" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -10.324308)
+speed = 3.2
 
-[node name="Bot42" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot42" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -11.324308)
+speed = 3.2
 
-[node name="Bot43" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot43" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -12.324308)
+speed = 3.2
 
-[node name="Bot44" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot44" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -13.324308)
+speed = 3.2
 
-[node name="Bot45" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot45" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -4.3243084)
+speed = 3.2
 
-[node name="Bot46" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot46" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -3.3243084)
+speed = 3.2
 
-[node name="Bot47" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot47" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -2.3243084)
+speed = 3.2
 
-[node name="Bot48" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot48" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -1.3243084)
+speed = 3.2
 
-[node name="Bot49" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot49" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -1.3243084)
+speed = 3.2
 
-[node name="Bot50" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot50" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -2.3243084)
+speed = 3.2
 
-[node name="Bot51" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot51" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -3.3243084)
+speed = 3.2
 
-[node name="Bot52" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot52" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -4.3243084)
+speed = 3.2
 
-[node name="Bot53" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot53" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -15.824308)
+speed = 3.2
 
-[node name="Bot54" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot54" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -14.824308)
+speed = 3.2
 
-[node name="Bot55" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot55" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -13.824308)
+speed = 3.2
 
-[node name="Bot56" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot56" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -12.824308)
+speed = 3.2
 
-[node name="Bot57" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot57" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -12.824308)
+speed = 3.2
 
-[node name="Bot58" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot58" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -13.824308)
+speed = 3.2
 
-[node name="Bot59" parent="Agents" instance=ExtResource("4_vupmq")]
+[node name="Bot59" parent="Enemies" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -14.824308)
+speed = 3.2
 
 [node name="Maze" type="Node3D" parent="."]
 script = ExtResource("1_f46lh")
@@ -1933,13 +2040,6 @@ script = ExtResource("2_f46lh")
 
 [node name="Wall136" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall137" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")

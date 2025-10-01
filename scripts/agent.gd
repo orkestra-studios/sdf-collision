@@ -21,13 +21,12 @@ var input : Vector2 = Vector2.ZERO
 func _physics_process(delta: float) -> void:
 	
 	frame_count = (frame_count + 1) % frame_thortle
-	if is_rendered:  #thorttling
-		
+	if is_rendered:  #thorttlings
 		const t = 0.25
 		input = input.lerp(get_input(), t)
 		movement = movement.lerp(speed * delta * input, t)
-		movement = movement.lerp(apply_sdf_collision(movement), t)
 		movement = movement.lerp(apply_dynamic_collision(movement, 0.1), t)
+		movement = movement.lerp(apply_sdf_collision(movement), t)
 		
 		move(movement)
 		update_cell()
@@ -43,7 +42,7 @@ func get_input() -> Vector2:
 func apply_sdf_collision(dx : Vector2) -> Vector2:
 	var loc = location
 	#debug_sdf()
-	query = SDFScene.Main.query(loc, dx);
+	query = SDFScene.Main.query(loc, dx.limit_length(radius));
 	var diff = query.distance - radius
 	if diff < 0:
 		#print("inside: %.2f * (%.2f, %.2f)"%[diff, hitNormal.x, hitNormal.y])

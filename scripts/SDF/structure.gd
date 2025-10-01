@@ -33,8 +33,8 @@ func query(to : Vector2) -> SDF.Query:
 func bounds() -> Rect2: return aabb
 
 func _debug_draw(c : Color) -> void:
-	DebugDraw3D.draw_aabb_ab(Vectors.X_Z(bounds().position), Vectors.X_Z(bounds().end) + Vector3.UP, c )
+	#DebugDraw3D.draw_aabb_ab(Vectors.X_Z(bounds().position), Vectors.X_Z(bounds().end) + Vector3.UP, c )
 	for e in elements:
 		e._debug_draw(c)
 		if result.element == e: 
-			DebugDraw3D.draw_arrow_ray(e.global_position + 1.5 * Vector3.UP, Vector3.DOWN, 0.5, c, 0.5, true)
+			DebugDraw3D.draw_arrow_ray(e.global_position + 2.5 * Vector3.UP, Vector3.DOWN, 1.5, c, 0.5, true)

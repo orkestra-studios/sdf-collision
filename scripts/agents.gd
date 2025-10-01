@@ -46,14 +46,13 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	#throttling
-	#debug_draw(Color.WHITE)
+	debug_draw(Color.WHITE)
 	frame_count = (frame_count + 1) % 2
 	if frame_count > 0: return
 	if flow_target == null: return
 	
-	#debug_draw(Color.BLUE_VIOLET)
 	var next_target : Vector2i = grid.index(flow_target.location)
-	#if target == next_target: return
+	if target == next_target: return
 	generate_flowfield()
 	target = next_target
 	
@@ -63,8 +62,7 @@ func fill_cells():
 		for y in range(-20, 20):
 			var loc = Vector2(x,y)
 			if SDFScene.Main.query(loc).distance <= 0: continue
-			var cell : Cell = grid.get_cell_at(Vector2i(loc), true)
-			cell.debug_draw(Color.STEEL_BLUE)
+			grid.get_cell_at(Vector2i(loc), true)
 		
 static func get_cell(location : Vector2) -> Cell: return instance.grid.get_cell(location)
 
@@ -75,7 +73,7 @@ static func get_neighbor_cell(location : Vector2, direction : Vector2i) -> Cell:
 static func set_potential(cell : Cell, potential : float, iteration : int = 0):
 	
 	# early exit #1: out-of-range case
-	if iteration > instance.pathfinding_range: return 
+	if potential > instance.pathfinding_range: return 
 	
 	# early exit #2: the cell is already visited by a better path
 	if instance.flowfield.has(cell) and instance.flowfield[cell] <= potential: return
@@ -84,13 +82,11 @@ static func set_potential(cell : Cell, potential : float, iteration : int = 0):
 	instance.flowfield[cell] = potential
 	
 	#propogate around neighbors
-	var i = 0
 	for dir in neighbor_dirs:
 		var neighbor : Cell = instance.grid.get_cell_at(cell.id + dir)
 		if neighbor == null: continue
-		var propogate : float = potential + (1.94142 if i==1 else 1.0)
+		var propogate : float = potential + 1
 		set_potential(neighbor, propogate, iteration+1)
-		i = (i+1) % 2
 		
 static func get_potential(cell : Cell) -> float:
 	if instance.flowfield.has(cell): return instance.flowfield[cell]
@@ -108,7 +104,7 @@ func debug_draw(_c : Color):
 		#DebugDraw3D.draw_text(Vectors.X_Z(cell.id) + Vector3.UP * 1.25, "%.2f" % potential, 60, heatmap, 0.1)
 		#DebugDraw3D.draw_ray(Vectors.X_Z(cell.id), Vector3.UP, 0.8, heatmap, 0.1)
 		var pos = Vectors.X_Z(cell.id) + Vector3.UP * 0.25
-		DebugDraw3D.draw_sphere(pos, 0.05, heatmap)
+		DebugDraw3D.draw_square(pos, cell_size, heatmap)
 		
 func heatmap_color(value : float, min_value: float, max_value: float) -> Color:
 	# Normalize value to 0..1

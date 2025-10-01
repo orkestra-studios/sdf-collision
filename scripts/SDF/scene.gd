@@ -20,19 +20,22 @@ func _ready() -> void:
 func query(to : Vector2, dx : Vector2 = Vector2.ZERO) -> SDF.Query: 
 	var idx : Vector2i = _cell_index(to)
 	
-	DebugDraw3D.draw_ray(Vectors.X_Z(to), Vectors.X_Z(dx), dx.length(), Color.RED)
-	
 	# create a temporary cell around the query position
 	proximity.location = idx * cell_size
 	proximity.setup()
 	proximity.merge(grid.get(idx))
 	
-	# add one more cell from movement direction
-	var fwd : Vector2i = _cell_index(to + dx.normalized() * cell_size)
+	# add more cells onwards of movement direction
+	var dir = dx.normalized()
+	var fwd : Vector2i = _cell_index(to + dir * cell_size * 0.5)
+	var lft : Vector2i = _cell_index(to + dir.rotated(PI/2) * cell_size * 0.5)
+	var rgt : Vector2i = _cell_index(to + dir.rotated(-PI/2) * cell_size * 0.5)
 	proximity.merge(grid.get(fwd))
+	proximity.merge(grid.get(lft))
+	proximity.merge(grid.get(rgt))
 	
 	var result = proximity.query(to)
-	proximity._debug_draw(Color.STEEL_BLUE)
+	#proximity._debug_draw(Color.STEEL_BLUE)
 		
 	return result
 
@@ -74,7 +77,6 @@ class SDFCell extends Structure:
 		if other == null: return
 		elements.merge(other.elements)
 		aabb = aabb.merge(other.aabb)
-		#debug_draw(Color.STEEL_BLUE)
 		
 	func debug_draw(c : Color) -> void:
 		super._debug_draw(c)
