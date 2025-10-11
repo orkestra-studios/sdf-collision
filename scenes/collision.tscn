@@ -1,19 +1,22 @@
-[gd_scene load_steps=19 format=4 uid="uid://j0ea4doqqtxd"]
+[gd_scene load_steps=23 format=4 uid="uid://j0ea4doqqtxd"]
 
 [ext_resource type="Script" uid="uid://bqglwni5xl8v1" path="res://scripts/SDF/scene.gd" id="1_f46lh"]
 [ext_resource type="Material" uid="uid://dxey0qh001goj" path="res://graphics/materials/ground.tres" id="2_3bl6y"]
 [ext_resource type="Script" uid="uid://emm41wxv27du" path="res://scripts/SDF/block.gd" id="2_f46lh"]
 [ext_resource type="Material" uid="uid://dakxtjrimr408" path="res://graphics/materials/agent.tres" id="2_gsf2h"]
 [ext_resource type="Script" uid="uid://dr4wof7xlptgj" path="res://scripts/misc/camera.gd" id="2_udo1c"]
-[ext_resource type="Script" uid="uid://c4mdewu0a2jpu" path="res://scripts/agent.gd" id="2_yg52f"]
 [ext_resource type="ArrayMesh" uid="uid://dr6pbvojmu42o" path="res://graphics/3D/primitives_Icosphere.res" id="3_it4xe"]
 [ext_resource type="Script" uid="uid://b6ni830i2u1n4" path="res://scripts/agents.gd" id="4_18lml"]
 [ext_resource type="PackedScene" uid="uid://dj7knkh6tmd8e" path="res://scenes/prefabs/bot.tscn" id="4_vupmq"]
 [ext_resource type="Material" uid="uid://bqlvat45p3v3h" path="res://graphics/materials/wall.tres" id="5_pgl50"]
+[ext_resource type="Script" uid="uid://kcbjn3xv7pwf" path="res://scenes/player.gd" id="6_pc67d"]
 [ext_resource type="ArrayMesh" uid="uid://cddvql0wi3a8j" path="res://graphics/3D/primitives_Cube.res" id="6_wbxn8"]
 [ext_resource type="Material" uid="uid://d2xxf3ymf7adb" path="res://graphics/materials/outline.tres" id="8_18lml"]
 [ext_resource type="ArrayMesh" uid="uid://pliqi1c2yjli" path="res://graphics/3D/primitives_Cone.res" id="9_wptyw"]
+[ext_resource type="Material" uid="uid://10vderarjgh2" path="res://graphics/materials/follower.tres" id="10_atbkw"]
+[ext_resource type="Script" uid="uid://ctre5ls1r3bux" path="res://scenes/prefabs/follower.gd" id="11_3xf0h"]
 [ext_resource type="ArrayMesh" uid="uid://3gl5jpt21m73" path="res://graphics/3D/primitives_Cylinder.res" id="14_m5j8t"]
+[ext_resource type="Script" uid="uid://vko3urt68q6t" path="res://scripts/flow-field/field.gd" id="15_pc67d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh4ww"]
 
@@ -60,7 +63,27 @@ _surfaces = [{
 "vertex_data": PackedByteArray("2xW0OzkSRr1ymzs8ciUYvnd7fD7aQO6+C0kCvzfrez4FuBS8ZTEHu3cxhj9TqUs82xW0OzkSRr1ymzs8nuTPvmDuQD9YUJa+njEpPqLsQD9Dh+u+ZTEHu3cxhj9TqUs8NFXVPvXvez4K8o6+2xW0OzkSRr1ymzs8AEgCP0EEQT8hdxQ8ZTEHu3cxhj9TqUs8iuLPPl5CfD5YTpY+2xW0OzkSRr1ymzs8lyEYPifgQD/RPu4+ZTEHu3cxhj9TqUs82xW0OzkSRr1ymzs8ZTEHu3cxhj9TqUs8dDj7PuCDXD5ZKkE8UcQKP4hzAT+CVTk+LKsMPxIB/T5+zCK+lSUYvmN7fD7RPu4+bNnQvm9oPj99UZk++SSxPhGJAT9KEuC+WsQKv/AW/T5FWTm+bNnQvm9oPj99UZk+64gMvyYpAj/QMSQ+lSUYvmN7fD7RPu4+lcuovZ4j6zx/9ok+kLVtPsCb6jygNzA+/EgWPm2jTT7VJeA+BauvutyT+T7uYgw/BUSnvm9u/j44AOc+HymrPlmq+T4YQ+Q+7PMdvvwTRz/hIuY+5Sl7vlwudj87iTk+ZnamPRZEdz+E0Y4+TYrHPqO+SD8YOpI+ZnamPRZEdz+E0Y4+h5KaPrxldz87wFA8kLVtPsCb6jygNzA+sdKAPh9zCT1igiO+O6fOPj7KSD/nv4i+h5KaPrxldz87wFA81oDXPUZTdz9QyIq+lu8lPiZ7XT6m6+K+sdKAPh9zCT1igiO+V36mvWOuCz14046+gV43PCj0/D61YQy/2gMQvlmZSD8gX+a+1oDXPUZTdz9QyIq+1YVyvqFPdz+7pzi+CJ6nvtt4AT+xvea+S4zHvnIBXT4ZPJK+V36mvWOuCz14046+epSavgiUCT1HAFG8kTr7vuzdSD+OakG81YVyvqFPdz+7pzi+5Sl7vlwudj87iTk+BUSnvm9u/j44AOc+orDOvnb0Xz7nWYo+epSavgiUCT1HAFG8lcuovZ4j6zx/9ok+AoAFAJBI/7+dJLsVwB7cv9ErLlQCgP6//n/6//1//b8BgAQAb7cAwFMiqcoySTPAYdtD6kIAoLD8f/n/OR79v63dVTVqAJnkBIABAAAA4rAu1M+r/v8AgP9//f8AAEfkVLWtXZb/ZpsFgAMA/P/+/7mVnKS7/17P/3/8//3/R+QCgAQA/f8bzwCA+//G4f6/8831Tf3//v+m3/V/cfuUj/b/qV+OBGrwRWphW4jbp7erSlKivrXAyvH/X8sjBHSkCwBXoNZgRsKrSlGip6oruFggCYApn7i9RWphW+DHCsu6crw3XeiorluhjDp267PcV5SaVeH/Oc//f/9/UvoovV9L8n/oyBLCnrQNgNr7ituna2SqjOENwKRec8WXxkLKRY1ByFDdLrQqstqn0v+Sm0WNQchL7IPjqK9V0L3q6pFboYo6LuhHiIu6WyHTF7f3I9jTzS8AbOSnr1XQQhUU7r63tvKyE3ucmtVYFB0AxbCKulshhxRLo0BIRg2jF1bR+//+/6wF1cJmKqbrdR7vv7u3uPKsIs/LdkWj3mg5urUOAJ80FjfsvdwnKzLaSBbAQUhGDQpHJbZZUKgvK1ygygwyCrIAgP2/dkWk3m9v58ulXnPFj5AVtGFL8n/syA/C1U0kWCa36L9XUKgv1qNetbpyvDf2uNnJ")
 }]
 
+[sub_resource type="ArrayMesh" id="ArrayMesh_4bloa"]
+_surfaces = [{
+"aabb": AABB(-0.5489642, -0.048357222, -0.5483659, 1.0984511, 1.0967418, 1.0967505),
+"attribute_data": PackedByteArray("ui06PwAAgD+j6CI/2K9XP9FzUT/Yr1c/0XNRP4cRBz/puWg/AACAP7otOj+vYC8/jKILP69gLz+j6CI/hxEHP+m46D7Yr1c/jKILPwAAgD+6LLo+r2AvP+m46D6HEQc/jKKLPtivVz+6LLo+AACAP7osOj6vYC8/jKKLPocRBz+6LDo+AACAP7oouj2HEQc/uiy6PtivVz+j6KI+xIhDP9Fy0T7EiEM/uii6PdivVz8AAAAAr2AvPwD//z7EiEM/xtBFP8SIQz/puWg/r2AvP90WXT/EiEM/AACAP9ivVz+MoAs+7NdrP+m4aD7s12s/uiw6PtivVz+MoAs+xIhDP7ogOj3EiEM/6bhoPsSIQz+6KLo9r2AvP7ogOj2bORs/jKALPps5Gz+Moos+r2AvP+m4aD6bORs/o+iiPps5Gz+j6KI+7NdrP9Fy0T7s12s/6bjoPq9gLz/RctE+mzkbPwD//z6bORs/jKILP9ivVz8A//8+7NdrP5dFFz/s12s/l0UXP8SIQz+j6CI/r2AvP5dFFz+bORs/r4ouP5s5Gz+vii4/xIhDP7otOj/Yr1c/r4ouP+zXaz/G0EU/7NdrP9FzUT+vYC8/xtBFP5s5Gz/dFl0/mzkbP/RcdD/EiEM/6bloP9ivVz/dFl0/7NdrP/RcdD/s12s/"),
+"format": 34359742487,
+"index_count": 240,
+"index_data": PackedByteArray("EAAdABwAHAAdAB4AHAAeABUAHQAMAB4AFQAeAB8AFQAfACAAHgAMACEAHwAeACEAIAAfACIAIAAiABYAFgAiACMAIwAiACQAIwAkABEAIgAOACQAHwAOACIAHwAhAA4AIQAlAA4ADgAlACYAJgAlACcAJgAnAA8AJQAKACcAIQATACUAEwAKACUADAATACEADAASABMADAAoABIAEgAoACkAKAANACkAEgApAAgAEwASABQAEgAIABQAEwAUAAoAFAAqAAoACgAqACsAKwAqACwAKwAsAAsAKgAGACwAFAAXACoAFwAGACoACAAXABQACAAtABcALgAtAAgALgAvAC0ACQAvAC4ALwABAC0AFwAtADAALQABADAAFwAwAAYAMAAxAAYABgAxADIAMgAxADMAMgAzAAcAMQAFADMAMAA0ADEANAAFADEAAQA0ADAAAQA1ADQANgA1AAEANgA3ADUAAAA3ADYANwACADUANAA1ABgANQACABgANAAYAAUAGAA4AAUABQA4ADkAOQA4ADoAOQA6AAMAOAAZADoAGAAaADgAGgAZADgAAgAaABgAGgA7ABkAAgA8ABoAGgA8ADsAPAAbADsAPQA8AAIAPgAbADwAPQA+ADwABAA+AD0A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 63,
+"vertex_data": PackedByteArray("2xW0OzkSRr1ymzs8ciUYvnd7fD7aQO6+C0kCvzfrez4FuBS8ZTEHu3cxhj9TqUs82xW0OzkSRr1ymzs8nuTPvmDuQD9YUJa+njEpPqLsQD9Dh+u+ZTEHu3cxhj9TqUs8NFXVPvXvez4K8o6+2xW0OzkSRr1ymzs8AEgCP0EEQT8hdxQ8ZTEHu3cxhj9TqUs8iuLPPl5CfD5YTpY+2xW0OzkSRr1ymzs8lyEYPifgQD/RPu4+ZTEHu3cxhj9TqUs82xW0OzkSRr1ymzs8ZTEHu3cxhj9TqUs8dDj7PuCDXD5ZKkE8UcQKP4hzAT+CVTk+LKsMPxIB/T5+zCK+lSUYvmN7fD7RPu4+bNnQvm9oPj99UZk++SSxPhGJAT9KEuC+WsQKv/AW/T5FWTm+bNnQvm9oPj99UZk+64gMvyYpAj/QMSQ+lSUYvmN7fD7RPu4+lcuovZ4j6zx/9ok+kLVtPsCb6jygNzA+/EgWPm2jTT7VJeA+BauvutyT+T7uYgw/BUSnvm9u/j44AOc+HymrPlmq+T4YQ+Q+7PMdvvwTRz/hIuY+5Sl7vlwudj87iTk+ZnamPRZEdz+E0Y4+TYrHPqO+SD8YOpI+ZnamPRZEdz+E0Y4+h5KaPrxldz87wFA8kLVtPsCb6jygNzA+sdKAPh9zCT1igiO+O6fOPj7KSD/nv4i+h5KaPrxldz87wFA81oDXPUZTdz9QyIq+lu8lPiZ7XT6m6+K+sdKAPh9zCT1igiO+V36mvWOuCz14046+gV43PCj0/D61YQy/2gMQvlmZSD8gX+a+1oDXPUZTdz9QyIq+1YVyvqFPdz+7pzi+CJ6nvtt4AT+xvea+S4zHvnIBXT4ZPJK+V36mvWOuCz14046+epSavgiUCT1HAFG8kTr7vuzdSD+OakG81YVyvqFPdz+7pzi+5Sl7vlwudj87iTk+BUSnvm9u/j44AOc+orDOvnb0Xz7nWYo+epSavgiUCT1HAFG8lcuovZ4j6zx/9ok+AoAFAJBI/7+dJLsVwB7cv9ErLlQCgP6//n/6//1//b8BgAQAb7cAwFMiqcoySTPAYdtD6kIAoLD8f/n/OR79v63dVTVqAJnkBIABAAAA4rAu1M+r/v8AgP9//f8AAEfkVLWtXZb/ZpsFgAMA/P/+/7mVnKS7/17P/3/8//3/R+QCgAQA/f8bzwCA+//G4f6/8831Tf3//v+m3/V/cfuUj/b/qV+OBGrwRWphW4jbp7erSlKivrXAyvH/X8sjBHSkCwBXoNZgRsKrSlGip6oruFggCYApn7i9RWphW+DHCsu6crw3XeiorluhjDp267PcV5SaVeH/Oc//f/9/UvoovV9L8n/oyBLCnrQNgNr7ituna2SqjOENwKRec8WXxkLKRY1ByFDdLrQqstqn0v+Sm0WNQchL7IPjqK9V0L3q6pFboYo6LuhHiIu6WyHTF7f3I9jTzS8AbOSnr1XQQhUU7r63tvKyE3ucmtVYFB0AxbCKulshhxRLo0BIRg2jF1bR+//+/6wF1cJmKqbrdR7vv7u3uPKsIs/LdkWj3mg5urUOAJ80FjfsvdwnKzLaSBbAQUhGDQpHJbZZUKgvK1ygygwyCrIAgP2/dkWk3m9v58ulXnPFj5AVtGFL8n/syA/C1U0kWCa36L9XUKgv1qNetbpyvDf2uNnJ")
+}]
+
 [node name="Collision-World" type="Node3D"]
+
+[node name="FlowField" type="Node" parent="."]
+script = ExtResource("15_pc67d")
+width = 40
+height = 40
+cell_size = 1.0
+metadata/_custom_type_script = "uid://vko3urt68q6t"
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 31.66419, 16, 10)
@@ -80,11 +103,11 @@ surface_material_override/0 = ExtResource("2_3bl6y")
 metadata/_edit_lock_ = true
 
 [node name="Player" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.179816, 0, -7.333971)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4089546, 1.9073486e-06, -1.8717966)
 mesh = ExtResource("3_it4xe")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_gsf2h")
-script = ExtResource("2_yg52f")
+script = ExtResource("6_pc67d")
 is_rendered = true
 radius = 0.5
 
@@ -92,439 +115,717 @@ radius = 0.5
 mesh = SubResource("ArrayMesh_vupmq")
 surface_material_override/0 = ExtResource("8_18lml")
 
-[node name="Enemies" type="Node3D" parent="." node_paths=PackedStringArray("flow_target")]
+[node name="Follower" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.901186, -1.9073486e-06, -0.7712574)
+mesh = ExtResource("3_it4xe")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("10_atbkw")
+script = ExtResource("11_3xf0h")
+stop_range = 1.5
+is_rendered = true
+radius = 0.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Follower"]
+mesh = SubResource("ArrayMesh_4bloa")
+surface_material_override/0 = ExtResource("8_18lml")
+
+[node name="Bots" type="Node3D" parent="." node_paths=PackedStringArray("field", "flow_target")]
 script = ExtResource("4_18lml")
 cell_size = 1
-pathfinding_range = 20
+field = NodePath("../FlowField")
 flow_target = NodePath("../Player")
 
-[node name="Bot" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.138729, 0, -4.2902346)
-speed = 3.2
-
-[node name="Bot2" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.138729, 0, -3.2902346)
-speed = 3.2
-
-[node name="Bot3" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.638729, 0, -1.2902346)
-speed = 3.2
-
-[node name="Bot4" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8612709, 0, -2.2902346)
-speed = 3.2
-
-[node name="Bot5" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -8.324308)
-speed = 3.2
-
-[node name="Bot6" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -7.3243084)
-speed = 3.2
-
-[node name="Bot7" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -6.3243084)
-speed = 3.2
-
-[node name="Bot8" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot8" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -5.3243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot9" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -5.3243084)
-speed = 3.2
+[node name="Bot11" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.736476, 0, 10.435033)
+speed = 2.4
 
-[node name="Bot10" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -6.3243084)
-speed = 3.2
+[node name="Bot70" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6222754, 0, -11.936649)
+speed = 2.4
 
-[node name="Bot11" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -7.3243084)
-speed = 3.2
+[node name="Bot72" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3841791, 0, 10.013537)
+speed = 2.4
 
-[node name="Bot12" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -8.324308)
-speed = 3.2
+[node name="Bot73" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.877725, 0, -17.43665)
+speed = 2.4
 
-[node name="Bot69" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -12.824308)
-speed = 3.2
+[node name="Bot82" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.084624, 0, -15.926977)
+speed = 2.4
 
-[node name="Bot70" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -11.824308)
-speed = 3.2
+[node name="Bot84" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.084624, 0, -17.926977)
+speed = 2.4
 
-[node name="Bot71" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -10.824308)
-speed = 3.2
+[node name="Bot90" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.084624, 0, -11.926977)
+speed = 2.4
 
-[node name="Bot72" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -9.824308)
-speed = 3.2
-
-[node name="Bot73" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -9.824308)
-speed = 3.2
-
-[node name="Bot74" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -10.824308)
-speed = 3.2
-
-[node name="Bot75" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -11.824308)
-speed = 3.2
-
-[node name="Bot76" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.210222, 0, -12.824308)
-speed = 3.2
-
-[node name="Bot77" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -18.824308)
-speed = 3.2
-
-[node name="Bot78" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -17.824308)
-speed = 3.2
-
-[node name="Bot79" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -16.824308)
-speed = 3.2
-
-[node name="Bot80" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -15.824308)
-speed = 3.2
-
-[node name="Bot81" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -15.824308)
-speed = 3.2
-
-[node name="Bot82" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -16.824308)
-speed = 3.2
-
-[node name="Bot83" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -17.824308)
-speed = 3.2
-
-[node name="Bot84" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -18.824308)
-speed = 3.2
-
-[node name="Bot85" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -14.824308)
-speed = 3.2
-
-[node name="Bot86" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -13.824308)
-speed = 3.2
-
-[node name="Bot87" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -12.824308)
-speed = 3.2
-
-[node name="Bot88" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -11.824308)
-speed = 3.2
-
-[node name="Bot89" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -11.824308)
-speed = 3.2
-
-[node name="Bot90" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -12.824308)
-speed = 3.2
-
-[node name="Bot91" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -13.824308)
-speed = 3.2
-
-[node name="Bot92" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -14.824308)
-speed = 3.2
-
-[node name="Bot93" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -10.824308)
-speed = 3.2
-
-[node name="Bot94" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot94" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -9.824308)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot95" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -8.824308)
-speed = 3.2
+[node name="Bot98" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2352085, 0, -15.76437)
+speed = 2.4
 
-[node name="Bot96" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -7.8243084)
-speed = 3.2
+[node name="Bot99" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2352085, 0, -16.76437)
+speed = 2.4
 
-[node name="Bot97" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -7.8243084)
-speed = 3.2
-
-[node name="Bot98" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -8.824308)
-speed = 3.2
-
-[node name="Bot99" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -9.824308)
-speed = 3.2
-
-[node name="Bot100" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -10.824308)
-speed = 3.2
-
-[node name="Bot101" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -6.8243084)
-speed = 3.2
-
-[node name="Bot102" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -5.8243084)
-speed = 3.2
-
-[node name="Bot103" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot103" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -4.8243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot104" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -3.8243084)
-speed = 3.2
-
-[node name="Bot105" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -3.8243084)
-speed = 3.2
-
-[node name="Bot106" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -4.8243084)
-speed = 3.2
-
-[node name="Bot107" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -5.8243084)
-speed = 3.2
-
-[node name="Bot108" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot108" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -6.8243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot109" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -2.8243084)
-speed = 3.2
+[node name="Bot110" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.42277, 0, 1.2566204)
+speed = 2.4
 
-[node name="Bot110" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -1.8243084)
-speed = 3.2
-
-[node name="Bot111" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot111" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, -0.8243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot112" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.710222, 0, 0.1756916)
-speed = 3.2
-
-[node name="Bot113" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, 0.1756916)
-speed = 3.2
-
-[node name="Bot114" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -0.8243084)
-speed = 3.2
-
-[node name="Bot115" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot115" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -1.8243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot116" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.710222, 0, -2.8243084)
-speed = 3.2
+[node name="Bot16" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.406311, 0, 15.577648)
+speed = 2.4
 
-[node name="Bot13" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -13.324308)
-speed = 3.2
+[node name="Bot117" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.092738, 0, -8.141743)
+speed = 2.4
 
-[node name="Bot14" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -12.324308)
-speed = 3.2
+[node name="Bot119" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.092738, 0, -6.141743)
+speed = 2.4
 
-[node name="Bot15" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -11.324308)
-speed = 3.2
+[node name="Bot128" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.044092, 0, -13.911834)
+speed = 2.4
 
-[node name="Bot16" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.71022224, 0, -10.324308)
-speed = 3.2
+[node name="Bot130" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.977757, 0, 9.490787)
+speed = 2.4
 
-[node name="Bot17" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -10.324308)
-speed = 3.2
+[node name="Bot131" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.312141, 0, 15.851151)
+speed = 2.4
 
-[node name="Bot18" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -11.324308)
-speed = 3.2
+[node name="Bot62" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.630505, 0, 6.1951637)
+speed = 2.4
 
-[node name="Bot19" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -12.324308)
-speed = 3.2
+[node name="Bot65" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8378572, 0, -16.664581)
+speed = 2.4
 
-[node name="Bot20" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7102222, 0, -13.324308)
-speed = 3.2
+[node name="Bot67" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3378572, 0, -15.664581)
+speed = 2.4
 
-[node name="Bot21" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -9.324308)
-speed = 3.2
+[node name="Bot141" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6826935, 0, -8.294199)
+speed = 2.4
 
-[node name="Bot22" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -8.324308)
-speed = 3.2
+[node name="Bot142" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5058947, 0, -12.90567)
+speed = 2.4
 
-[node name="Bot23" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -7.3243084)
-speed = 3.2
+[node name="Bot146" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36619, 0, -13.176628)
+speed = 2.4
 
-[node name="Bot24" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.289778, 0, -6.3243084)
-speed = 3.2
+[node name="Bot149" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.454136, 0, -18.56429)
+speed = 2.4
 
-[node name="Bot25" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -6.3243084)
-speed = 3.2
+[node name="Bot151" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.454136, 0, -16.56429)
+speed = 2.4
 
-[node name="Bot26" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -7.3243084)
-speed = 3.2
+[node name="Bot152" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.454136, 0, -16.56429)
+speed = 2.4
 
-[node name="Bot27" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -8.324308)
-speed = 3.2
+[node name="Bot158" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.005894, 0, -13.90567)
+speed = 2.4
 
-[node name="Bot28" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.289778, 0, -9.324308)
-speed = 3.2
+[node name="Bot159" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.387802, 0, 7.838331)
+speed = 2.4
 
-[node name="Bot29" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 6.1756916)
-speed = 3.2
+[node name="Bot164" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.633811, 0, -17.176628)
+speed = 2.4
 
-[node name="Bot30" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 7.1756916)
-speed = 3.2
+[node name="Bot167" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.835849, 0, -16.704697)
+speed = 2.4
 
-[node name="Bot31" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 8.175692)
-speed = 3.2
+[node name="Bot169" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8876066, 0, -15.546078)
+speed = 2.4
 
-[node name="Bot32" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.289778, 0, 9.175692)
-speed = 3.2
+[node name="Bot170" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.387607, 0, -16.046078)
+speed = 2.4
 
-[node name="Bot33" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 9.175692)
-speed = 3.2
+[node name="Bot180" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3201065, 0, -17.262997)
+speed = 2.4
 
-[node name="Bot34" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 8.175692)
-speed = 3.2
+[node name="Bot184" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.26784, 0, -12.650656)
+speed = 2.4
 
-[node name="Bot35" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 7.1756916)
-speed = 3.2
+[node name="Bot186" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.26784, 0, -14.650656)
+speed = 2.4
 
-[node name="Bot36" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.289778, 0, 6.1756916)
-speed = 3.2
+[node name="Bot191" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.26784, 0, -9.650656)
+speed = 2.4
 
-[node name="Bot37" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -13.324308)
-speed = 3.2
+[node name="Bot194" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.678859, 0, 10.108685)
+speed = 2.4
 
-[node name="Bot38" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -12.324308)
-speed = 3.2
+[node name="Bot200" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5616055, 0, -12.903404)
+speed = 2.4
 
-[node name="Bot39" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -11.324308)
-speed = 3.2
+[node name="Bot202" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4383955, 0, -18.403404)
+speed = 2.4
 
-[node name="Bot40" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7897778, 0, -10.324308)
-speed = 3.2
+[node name="Bot19" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.301141, 0, -13.9416275)
+speed = 2.4
 
-[node name="Bot41" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -10.324308)
-speed = 3.2
+[node name="Bot21" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -8.324308)
+speed = 2.4
 
-[node name="Bot42" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -11.324308)
-speed = 3.2
+[node name="Bot26" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.426608, 0, -5.554218)
+speed = 2.4
 
-[node name="Bot43" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -12.324308)
-speed = 3.2
+[node name="Bot27" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.426608, 0, -6.554218)
+speed = 2.4
 
-[node name="Bot44" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7897778, 0, -13.324308)
-speed = 3.2
+[node name="Bot31" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.514645, 0, 0.653882)
+speed = 2.4
 
-[node name="Bot45" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot34" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.514645, 0, 0.653882)
+speed = 2.4
+
+[node name="Bot35" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.514645, 0, -0.34611797)
+speed = 2.4
+
+[node name="Bot38" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.213376, -1.9073486e-06, -7.559782)
+speed = 2.4
+
+[node name="Bot43" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.975127, -1.9073486e-06, -0.49194622)
+speed = 2.4
+
+[node name="Bot45" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -4.3243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot46" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -3.3243084)
-speed = 3.2
+[node name="Bot48" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.641654, 0, -4.082464)
+speed = 2.4
 
-[node name="Bot47" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -2.3243084)
-speed = 3.2
-
-[node name="Bot48" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.210222, 0, -1.3243084)
-speed = 3.2
-
-[node name="Bot49" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -1.3243084)
-speed = 3.2
-
-[node name="Bot50" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -2.3243084)
-speed = 3.2
-
-[node name="Bot51" parent="Enemies" instance=ExtResource("4_vupmq")]
+[node name="Bot51" parent="Bots" instance=ExtResource("4_vupmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -3.3243084)
-speed = 3.2
+speed = 2.4
 
-[node name="Bot52" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.210222, 0, -4.3243084)
-speed = 3.2
+[node name="Bot59" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.210222, 0, -17.824308)
+speed = 2.4
 
-[node name="Bot53" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -15.824308)
-speed = 3.2
+[node name="Bot209" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.397353, 1.9073486e-06, -6.0476613)
+speed = 2.4
 
-[node name="Bot54" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -14.824308)
-speed = 3.2
+[node name="Bot213" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.239477, 1.9073486e-06, -5.817752)
+speed = 2.4
 
-[node name="Bot55" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -13.824308)
-speed = 3.2
+[node name="Bot216" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.791235, 1.9073486e-06, -13.659134)
+speed = 2.4
 
-[node name="Bot56" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7102222, 0, -12.824308)
-speed = 3.2
+[node name="Bot218" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6515303, 1.9073486e-06, -15.930092)
+speed = 2.4
 
-[node name="Bot57" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -12.824308)
-speed = 3.2
+[node name="Bot223" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.791235, 1.9073486e-06, -13.659134)
+speed = 2.4
 
-[node name="Bot58" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -13.824308)
-speed = 3.2
+[node name="Bot233" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.673141, 1.9073486e-06, 8.084868)
+speed = 2.4
 
-[node name="Bot59" parent="Enemies" instance=ExtResource("4_vupmq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7102222, 0, -14.824308)
-speed = 3.2
+[node name="Bot235" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.673141, 1.9073486e-06, 10.084868)
+speed = 2.4
+
+[node name="Bot236" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.739477, 1.9073486e-06, -11.317752)
+speed = 2.4
+
+[node name="Bot241" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.649745, 1.9073486e-06, 9.660579)
+speed = 2.4
+
+[node name="Bot248" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.207221, 1.9073486e-06, 11.441589)
+speed = 2.4
+
+[node name="Bot252" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9284945, 1.9073486e-06, -6.62798)
+speed = 2.4
+
+[node name="Bot253" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9284945, 1.9073486e-06, -5.62798)
+speed = 2.4
+
+[node name="Bot254" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9284945, 1.9073486e-06, -8.62798)
+speed = 2.4
+
+[node name="Bot262" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.23958, 1.9073486e-06, 4.4826074)
+speed = 2.4
+
+[node name="Bot266" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.672947, 1.9073486e-06, -15.799541)
+speed = 2.4
+
+[node name="Bot268" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.054855, 1.9073486e-06, 7.944461)
+speed = 2.4
+
+[node name="Bot272" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.063483, 1.9073486e-06, -7.6351867)
+speed = 2.4
+
+[node name="Bot275" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.063483, 1.9073486e-06, -5.6351867)
+speed = 2.4
+
+[node name="Bot279" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.453333, 1.9073486e-06, 7.930868)
+speed = 2.4
+
+[node name="Bot280" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.007011, 1.9073486e-06, 7.997343)
+speed = 2.4
+
+[node name="Bot288" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0146, 1.9073486e-06, -15.017617)
+speed = 2.4
+
+[node name="Bot291" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.393694, 1.9073486e-06, -7.852019)
+speed = 2.4
+
+[node name="Bot295" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.073347, 1.9073486e-06, -4.4052773)
+speed = 2.4
+
+[node name="Bot298" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8671122, 1.9073486e-06, -10.158024)
+speed = 2.4
+
+[node name="Bot303" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.653439, 1.9073486e-06, -7.787642)
+speed = 2.4
+
+[node name="Bot304" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5351496, 1.9073486e-06, -11.899115)
+speed = 2.4
+
+[node name="Bot307" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3954449, 1.9073486e-06, -15.170073)
+speed = 2.4
+
+[node name="Bot309" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.53515, 1.9073486e-06, -13.399115)
+speed = 2.4
+
+[node name="Bot311" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.48339, 1.9073486e-06, -18.057732)
+speed = 2.4
+
+[node name="Bot2" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.026738, -1.9073486e-06, -2.5657003)
+speed = 2.4
+
+[node name="Bot9" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.835774, 0, -5.1187515)
+speed = 2.4
+
+[node name="Bot12" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.110924, 0, 10.64059)
+speed = 2.4
+
+[node name="Bot71" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2478275, 0, -11.731092)
+speed = 2.4
+
+[node name="Bot74" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009731293, 0, 10.327182)
+speed = 2.4
+
+[node name="Bot75" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.252172, 0, -17.231092)
+speed = 2.4
+
+[node name="Bot83" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.710176, 0, -15.72142)
+speed = 2.4
+
+[node name="Bot85" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.710176, 0, -17.72142)
+speed = 2.4
+
+[node name="Bot91" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.710176, 0, -11.72142)
+speed = 2.4
+
+[node name="Bot95" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.335773, 0, -9.618752)
+speed = 2.4
+
+[node name="Bot100" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6096563, 0, -15.558813)
+speed = 2.4
+
+[node name="Bot101" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6096563, 0, -16.558813)
+speed = 2.4
+
+[node name="Bot104" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.335773, 0, -4.6187515)
+speed = 2.4
+
+[node name="Bot109" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.335773, 0, -6.6187515)
+speed = 2.4
+
+[node name="Bot112" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.797218, 0, 1.4621775)
+speed = 2.4
+
+[node name="Bot113" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.335773, 0, -0.6187513)
+speed = 2.4
+
+[node name="Bot116" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.335773, 0, -1.6187513)
+speed = 2.4
+
+[node name="Bot17" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7807589, 0, 15.783205)
+speed = 2.4
+
+[node name="Bot118" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.467186, 0, -7.936186)
+speed = 2.4
+
+[node name="Bot120" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.467186, 0, -5.936186)
+speed = 2.4
+
+[node name="Bot129" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.669643, 0, -13.706277)
+speed = 2.4
+
+[node name="Bot132" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.60331, 0, 9.696343)
+speed = 2.4
+
+[node name="Bot133" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.937694, 0, 16.05671)
+speed = 2.4
+
+[node name="Bot63" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.004951, 0, 6.4007206)
+speed = 2.4
+
+[node name="Bot66" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46340942, 0, -16.459024)
+speed = 2.4
+
+[node name="Bot68" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9634094, 0, -15.459024)
+speed = 2.4
+
+[node name="Bot143" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.057141, 0, -8.088642)
+speed = 2.4
+
+[node name="Bot144" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.131447, 0, -12.700113)
+speed = 2.4
+
+[node name="Bot147" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008257866, 0, -12.971071)
+speed = 2.4
+
+[node name="Bot150" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.079688, 0, -18.358732)
+speed = 2.4
+
+[node name="Bot153" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.079688, 0, -16.358732)
+speed = 2.4
+
+[node name="Bot154" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.079689, 0, -16.358732)
+speed = 2.4
+
+[node name="Bot160" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.631446, 0, -13.700113)
+speed = 2.4
+
+[node name="Bot161" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.013354, 0, 8.043888)
+speed = 2.4
+
+[node name="Bot165" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.008259, 0, -16.971071)
+speed = 2.4
+
+[node name="Bot168" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.461401, 0, -16.49914)
+speed = 2.4
+
+[node name="Bot171" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.513159, 0, -15.340521)
+speed = 2.4
+
+[node name="Bot172" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.013159, 0, -15.840521)
+speed = 2.4
+
+[node name="Bot181" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.694554, 0, -17.05744)
+speed = 2.4
+
+[node name="Bot185" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.89339, 0, -12.445099)
+speed = 2.4
+
+[node name="Bot187" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.89339, 0, -14.445099)
+speed = 2.4
+
+[node name="Bot192" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.89339, 0, -9.445099)
+speed = 2.4
+
+[node name="Bot195" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.053307, 0, 10.314241)
+speed = 2.4
+
+[node name="Bot201" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1871576, 0, -12.697847)
+speed = 2.4
+
+[node name="Bot203" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.812843, 0, -18.197847)
+speed = 2.4
+
+[node name="Bot20" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926693, 0, -13.736071)
+speed = 2.4
+
+[node name="Bot22" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.835774, 0, -8.118752)
+speed = 2.4
+
+[node name="Bot28" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.801056, 0, -5.3486605)
+speed = 2.4
+
+[node name="Bot29" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.801056, 0, -6.3486605)
+speed = 2.4
+
+[node name="Bot32" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.140197, 0, 0.85943913)
+speed = 2.4
+
+[node name="Bot36" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.140197, 0, 0.85943913)
+speed = 2.4
+
+[node name="Bot37" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.140197, 0, -0.14056087)
+speed = 2.4
+
+[node name="Bot39" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.587824, -1.9073486e-06, -7.354225)
+speed = 2.4
+
+[node name="Bot44" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.600679, -1.9073486e-06, -0.2863891)
+speed = 2.4
+
+[node name="Bot46" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.835774, 0, -4.1187515)
+speed = 2.4
+
+[node name="Bot49" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.267206, 0, -3.876907)
+speed = 2.4
+
+[node name="Bot52" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.835774, 0, -3.1187513)
+speed = 2.4
+
+[node name="Bot60" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.835774, 0, -17.618752)
+speed = 2.4
+
+[node name="Bot210" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.771801, 1.9073486e-06, -5.842104)
+speed = 2.4
+
+[node name="Bot214" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.865029, 1.9073486e-06, -5.612195)
+speed = 2.4
+
+[node name="Bot217" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.416787, 1.9073486e-06, -13.453577)
+speed = 2.4
+
+[node name="Bot219" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27708244, 1.9073486e-06, -15.724535)
+speed = 2.4
+
+[node name="Bot224" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.416787, 1.9073486e-06, -13.453577)
+speed = 2.4
+
+[node name="Bot234" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.298694, 1.9073486e-06, 8.290425)
+speed = 2.4
+
+[node name="Bot237" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.298694, 1.9073486e-06, 10.290425)
+speed = 2.4
+
+[node name="Bot238" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.365028, 1.9073486e-06, -11.112195)
+speed = 2.4
+
+[node name="Bot242" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.275297, 1.9073486e-06, 9.866136)
+speed = 2.4
+
+[node name="Bot249" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.581669, 1.9073486e-06, 11.647146)
+speed = 2.4
+
+[node name="Bot255" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5540466, 1.9073486e-06, -6.4224234)
+speed = 2.4
+
+[node name="Bot256" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5540466, 1.9073486e-06, -5.4224234)
+speed = 2.4
+
+[node name="Bot257" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5540466, 1.9073486e-06, -8.422423)
+speed = 2.4
+
+[node name="Bot263" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.865132, 1.9073486e-06, 4.6881647)
+speed = 2.4
+
+[node name="Bot267" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.298499, 1.9073486e-06, -15.593985)
+speed = 2.4
+
+[node name="Bot269" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.680408, 1.9073486e-06, 8.150018)
+speed = 2.4
+
+[node name="Bot273" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.437931, 1.9073486e-06, -7.4296293)
+speed = 2.4
+
+[node name="Bot276" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.437931, 1.9073486e-06, -5.4296293)
+speed = 2.4
+
+[node name="Bot281" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078885, 1.9073486e-06, 8.136425)
+speed = 2.4
+
+[node name="Bot282" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.632564, 1.9073486e-06, 8.2029)
+speed = 2.4
+
+[node name="Bot289" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3890476, 1.9073486e-06, -14.81206)
+speed = 2.4
+
+[node name="Bot292" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.768143, 1.9073486e-06, -7.6464615)
+speed = 2.4
+
+[node name="Bot296" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.698899, 1.9073486e-06, -4.1997204)
+speed = 2.4
+
+[node name="Bot299" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49266434, 1.9073486e-06, -9.952467)
+speed = 2.4
+
+[node name="Bot305" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.027886, 1.9073486e-06, -7.5820847)
+speed = 2.4
+
+[node name="Bot306" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1607018, 1.9073486e-06, -11.693558)
+speed = 2.4
+
+[node name="Bot308" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.020997, 1.9073486e-06, -14.964516)
+speed = 2.4
+
+[node name="Bot310" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1607018, 1.9073486e-06, -13.193558)
+speed = 2.4
+
+[node name="Bot312" parent="Bots" instance=ExtResource("4_vupmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.108943, 1.9073486e-06, -17.852175)
+speed = 2.4
 
 [node name="Maze" type="Node3D" parent="."]
 script = ExtResource("1_f46lh")
@@ -537,6 +838,13 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall100" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 10)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall90" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
 mesh = ExtResource("6_wbxn8")
@@ -544,8 +852,8 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall91" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
+[node name="Wall98" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -558,15 +866,64 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall101" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall103" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall104" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall111" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall119" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall120" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall121" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 6)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall191" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 5)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall192" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -581,6 +938,13 @@ script = ExtResource("2_f46lh")
 
 [node name="Wall165" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall181" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -671,14 +1035,14 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall175" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 9)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall148" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -9)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -741,7 +1105,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall400" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -11)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -768,176 +1132,8 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall408" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -13)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall409" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall410" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall411" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -15)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall412" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall413" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -7)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall414" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall415" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -8)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall416" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall417" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall418" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 7)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall419" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 8)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall420" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 6)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall421" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall422" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 4)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall423" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 4)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall424" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall425" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall426" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 2)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall427" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall428" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 8)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall429" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 9)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall430" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 7)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall431" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 6)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall432" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 8, -10, 0, -7.5)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -957,16 +1153,15 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall443" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, -17.5, 0, 17)
-mesh = ExtResource("14_m5j8t")
+[node name="Wall438" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 19)
+mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
-shape = 1
 
 [node name="Wall445" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -15, 0, 17)
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -13, 0, 17)
 mesh = ExtResource("14_m5j8t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -974,15 +1169,7 @@ script = ExtResource("2_f46lh")
 shape = 1
 
 [node name="Wall446" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.86602527, 0, 0.49999994, 0, 1, 0, -0.49999994, 0, 0.86602527, -15, 0, 14.509459)
-mesh = ExtResource("14_m5j8t")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-shape = 1
-
-[node name="Wall447" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -17.5, 0, 14.5)
+transform = Transform3D(0.86602527, 0, 0.49999994, 0, 1, 0, -0.49999994, 0, 0.86602527, -16, 0, 14)
 mesh = ExtResource("14_m5j8t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -990,7 +1177,7 @@ script = ExtResource("2_f46lh")
 shape = 1
 
 [node name="Wall473" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -12.5, 0, 14.5)
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -13, 0, 14)
 mesh = ExtResource("14_m5j8t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1007,7 +1194,7 @@ shape = 1
 inset = 0.1
 
 [node name="Wall474" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.96592575, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.96592575, -12.5, 0, 17)
+transform = Transform3D(0.96592575, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.96592575, -16, 0, 17)
 mesh = ExtResource("14_m5j8t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1015,7 +1202,7 @@ script = ExtResource("2_f46lh")
 shape = 1
 
 [node name="Wall475" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -10, 0, 14.5)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -10, 0, 14)
 mesh = ExtResource("14_m5j8t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1037,6 +1224,13 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall439" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall436" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 14)
 mesh = ExtResource("6_wbxn8")
@@ -1051,43 +1245,29 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall438" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 1)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall439" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 2)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall440" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, -16, 0, 0)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall441" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, -8, 0, 0)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall442" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -2)
+transform = Transform3D(-4.371139e-08, 0, -3, 0, 1, 0, 1, 0, -1.3113416e-07, -5, 0, -1.9999999)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall444" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, 17, 0, -16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, 17, 0, -15)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1101,7 +1281,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall449" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 19)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 18)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1135,13 +1315,6 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall454" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 19)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall455" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 17)
 mesh = ExtResource("6_wbxn8")
@@ -1157,7 +1330,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall457" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 19)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1170,8 +1343,22 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall478" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall481" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall459" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 14)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 19)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1206,7 +1393,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall464" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 18)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 18)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1240,8 +1427,71 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall477" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall479" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall480" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 14)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall486" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall483" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 19)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall484" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 18)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall482" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 13)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall469" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall487" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 16)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall488" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 17)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1256,6 +1506,13 @@ script = ExtResource("2_f46lh")
 
 [node name="Wall471" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall485" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 12)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1289,13 +1546,6 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall218" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall106" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
 mesh = ExtResource("6_wbxn8")
@@ -1304,7 +1554,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall107" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -3)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1353,7 +1603,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall208" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -10)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1416,7 +1666,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall114" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 4)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1485,20 +1735,6 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall140" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall141" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -9)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall287" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 39, 20, 0, 0)
 mesh = ExtResource("6_wbxn8")
@@ -1508,41 +1744,6 @@ script = ExtResource("2_f46lh")
 
 [node name="Wall288" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 39, -20, 0, 0)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall119" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall221" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall222" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall120" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall121" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -5)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1605,7 +1806,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall356" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 6)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1613,6 +1814,13 @@ script = ExtResource("2_f46lh")
 
 [node name="Wall357" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 12)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall362" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 11)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1646,90 +1854,6 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall362" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -11)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall363" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -11)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall364" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -11)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall365" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -11)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall366" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -11)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall367" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -11)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall368" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -18)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall369" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall370" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall371" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall372" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall373" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -18)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall379" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(3.2749655, 0, 0.5741625, 0, 1, 0, -2.29665, 0, 0.8187414, 11.009569, 0, -14.134405)
 mesh = ExtResource("6_wbxn8")
@@ -1758,15 +1882,43 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall387" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall388" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 10)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall382" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall390" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 14)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall383" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 15)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall389" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 16)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1787,42 +1939,14 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall386" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall387" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall388" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall389" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall390" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 11)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall391" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 3)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 3)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1864,7 +1988,7 @@ surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
 [node name="Wall397" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 15)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -1919,85 +2043,8 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall128" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall129" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall219" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall180" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall181" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall130" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall182" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall183" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall220" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall184" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 3)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall185" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall131" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 5)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -2066,6 +2113,48 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
+[node name="Wall140" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall214" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall222" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall141" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall219" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall226" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 3)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
 [node name="Wall190" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 9)
 mesh = ExtResource("6_wbxn8")
@@ -2073,8 +2162,22 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall170" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 7)
+[node name="Wall220" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 10)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall221" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 11)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall227" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 11)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -2096,6 +2199,13 @@ script = ExtResource("2_f46lh")
 
 [node name="Wall173" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 7)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[node name="Wall182" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 8)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -2220,50 +2330,8 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
 
-[node name="Wall163" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall164" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 4)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall142" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall98" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
 [node name="Wall204" type="MeshInstance3D" parent="Maze"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall99" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -7)
-mesh = ExtResource("6_wbxn8")
-skeleton = NodePath("")
-surface_material_override/0 = ExtResource("5_pgl50")
-script = ExtResource("2_f46lh")
-
-[node name="Wall100" type="MeshInstance3D" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -7)
 mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
@@ -2289,3 +2357,12 @@ mesh = ExtResource("6_wbxn8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("5_pgl50")
 script = ExtResource("2_f46lh")
+
+[node name="Wall163" type="MeshInstance3D" parent="Maze"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 8)
+mesh = ExtResource("6_wbxn8")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_pgl50")
+script = ExtResource("2_f46lh")
+
+[connection signal="cell_changed" from="Follower" to="Follower" method="_on_cell_changed"]

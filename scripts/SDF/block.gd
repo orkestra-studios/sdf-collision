@@ -5,13 +5,13 @@ class_name Block extends SDFElement
 
 var aabb : Rect2
 
-func setup(): 
-	var size := Vector2.ONE * Vectors.XZ(scale)
+func setup() -> void: 
+	var size : Vector2 = Vector2.ONE * Vectors.XZ(scale)
 	aabb = Rect2(Vectors.XZ(global_position) - size * 0.5, size)
 
 func query(to : Vector2) -> SDF.Query:
 	#var pos = Vectors.XZ(to_local(Vectors.X_Z(to)))
-	var pos = SDF.rotate(SDF.translate(to, Vectors.XZ(global_position)), global_rotation.y)
+	var pos : Vector2 = SDF.rotate(SDF.translate(to, Vectors.XZ(global_position)), global_rotation.y)
 	var dist : float = INF
 	match shape:
 		SDF.Shape.Rect:

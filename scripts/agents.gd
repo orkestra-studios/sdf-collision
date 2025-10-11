@@ -5,25 +5,13 @@ static var instance : AgentsManager
 @export var cell_size : int = 4
 
 @export_subgroup("Flow Field")
-@export var pathfinding_range : int = 10
+@export var field : FlowField
 @export var flow_target : Agent
+const SEPARATION : int = 10
 
 var grid : Grid
 var flowfield : Dictionary[Cell, float]
 var target : Vector2i
-
-var frame_count : int
-
-const neighbor_dirs : Array[Vector2i] = [
-		Vector2i.RIGHT,
-		Vector2i(1, 1),
-		Vector2i.DOWN,
-		Vector2i(-1, 1),
-		Vector2i.LEFT,
-		Vector2i(-1, -1),
-		Vector2i.UP,
-		Vector2i(1, -1)
-]
 
 func _ready() -> void:
 	#singleton
@@ -31,100 +19,64 @@ func _ready() -> void:
 		self.free()
 		return
 	instance = self
-	frame_count = 0
 	
 	grid = Grid.new(cell_size)
 	var count : int = 0
-	for child in get_children():
+	for child : Node in get_children():
 		if child is not Entity: continue
-		var entity := child as Entity
+		var entity : Entity = child as Entity
 		grid.get_cell(entity.location).insert(child)
 		count += 1
 	print(count, " entities loaded!")
 	
-	fill_cells()
+	generate_flow_field()
 	
 func _process(_delta: float) -> void:
-	#throttling
 	debug_draw(Color.WHITE)
-	frame_count = (frame_count + 1) % 2
-	if frame_count > 0: return
+	#if Engine.get_process_frames() % 2 > 0: return #throttling
 	if flow_target == null: return
-	
-	var next_target : Vector2i = grid.index(flow_target.location)
-	if target == next_target: return
-	generate_flowfield()
-	target = next_target
-	
-func fill_cells():
-	await get_tree().process_frame
-	for x in range(-20, 20):
-		for y in range(-20, 20):
-			var loc = Vector2(x,y)
-			if SDFScene.Main.query(loc).distance <= 0: continue
-			grid.get_cell_at(Vector2i(loc), true)
+	update_flow_field(flow_target.location)
 		
 static func get_cell(location : Vector2) -> Cell: return instance.grid.get_cell(location)
 
 static func get_neighbor_cell(location : Vector2, direction : Vector2i) -> Cell:
-	var idx := instance.grid.index(location)
+	var idx : Vector2i = instance.grid.index(location)
 	return instance.grid.get_cell_at(idx + direction)
-
-static func set_potential(cell : Cell, potential : float, iteration : int = 0):
 	
-	# early exit #1: out-of-range case
-	if potential > instance.pathfinding_range: return 
+func generate_flow_field() -> void:
+	field._init()
+	if field == null: return
+	await get_tree().process_frame
+	for x : int in range(-20, 20):
+		for y : int in range(-20, 20):
+			var loc : Vector2i = Vector2i(x,y)
+			if SDFScene.Main.query(loc).distance <= 0: field.set_cost(x+20, y+20, FlowField.CellType.SOLID)
+			else: field.set_cost(x+20, y+20, FlowField.CellType.EMPTY)
+			
+func update_flow_field(goal : Vector2) -> void:
+	if Input.is_action_pressed("debug"):field.debug_draw()
+	var _goal : Vector2i = field.world_to_grid(goal)
+	#if target == _goal: return
+	target = _goal
+	field.build_integration(target)
+	field.build_flow()
 	
-	# early exit #2: the cell is already visited by a better path
-	if instance.flowfield.has(cell) and instance.flowfield[cell] <= potential: return
-		
-	# update potential
-	instance.flowfield[cell] = potential
+static func update_flowfield_cost(location : Vector2, entered : bool) -> void:
+	var idx : Vector2i = instance.field.world_to_grid(location)
+	var cost : int = instance.field.get_cost(idx.x, idx.y)
+	instance.field.set_cost(idx.x, idx.y,
+		min(FlowField.CellType.SOLID-1, cost + SEPARATION) if entered else max(FlowField.CellType.EMPTY, cost - SEPARATION)
+	)
 	
-	#propogate around neighbors
-	for dir in neighbor_dirs:
-		var neighbor : Cell = instance.grid.get_cell_at(cell.id + dir)
-		if neighbor == null: continue
-		var propogate : float = potential + 1
-		set_potential(neighbor, propogate, iteration+1)
-		
-static func get_potential(cell : Cell) -> float:
-	if instance.flowfield.has(cell): return instance.flowfield[cell]
-	else: return instance.pathfinding_range + 1
+static func get_direction(from : Vector2) -> Vector2:
+	return instance.field.get_direction(from)
 	
-func generate_flowfield():
-	instance.flowfield.clear()
-	var cell : Cell = grid.get_cell_at(target, true)
-	set_potential(cell, 0)
+static func get_path_distance(from : Vector2) -> float:
+	return instance.field.get_distance(from)
 	
-func debug_draw(_c : Color):
-	for cell in flowfield:
-		var potential : float = flowfield[cell]
-		var heatmap = heatmap_color(potential, 0, pathfinding_range)
-		#DebugDraw3D.draw_text(Vectors.X_Z(cell.id) + Vector3.UP * 1.25, "%.2f" % potential, 60, heatmap, 0.1)
-		#DebugDraw3D.draw_ray(Vectors.X_Z(cell.id), Vector3.UP, 0.8, heatmap, 0.1)
-		var pos = Vectors.X_Z(cell.id) + Vector3.UP * 0.25
-		DebugDraw3D.draw_square(pos, cell_size, heatmap)
-		
-func heatmap_color(value : float, min_value: float, max_value: float) -> Color:
-	# Normalize value to 0..1
-	var t = 1 - clamp((value - min_value) / (max_value - min_value), 0.0, 1.0)
-
-	# Thermal vision palette: black → deep blue → purple → red → orange → yellow → white
-	const colors = [
-		Color(0, 0, 0.5),         # deep blue
-		Color(0.5, 0, 1.0),       # purple
-		Color(1.0, 0, 0),         # red
-		Color(1.0, 0.5, 0),       # orange
-		Color(1.0, 1.0, 0),       # yellow
-		Color(1.0, 1.0, 1.0)      # white
-	]
-
-	var n = colors.size() - 1
-	var scaled = t * n
-	var i = int(floor(scaled))
-	var f = scaled - i
-
-	if i >= n:
-		return colors[n]
-	return colors[i].lerp(colors[i + 1], f)
+static func get_squared_distance(from : Vector2) -> float:
+	return instance.flow_target.location.distance_squared_to(from)
+	
+	
+func debug_draw(_c : Color) -> void:
+	DebugDraw2D.set_text("FPS", Engine.get_frames_per_second(), 0, _c)

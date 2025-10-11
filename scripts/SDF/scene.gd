@@ -26,31 +26,31 @@ func query(to : Vector2, dx : Vector2 = Vector2.ZERO) -> SDF.Query:
 	proximity.merge(grid.get(idx))
 	
 	# add more cells onwards of movement direction
-	var dir = dx.normalized()
+	var dir : Vector2 = dx.normalized()
 	var fwd : Vector2i = _cell_index(to + dir * cell_size * 0.5)
-	var lft : Vector2i = _cell_index(to + dir.rotated(PI/2) * cell_size * 0.5)
-	var rgt : Vector2i = _cell_index(to + dir.rotated(-PI/2) * cell_size * 0.5)
+	var lft : Vector2i = _cell_index(to + dir.rotated(PI/4) * cell_size * 0.5)
+	var rgt : Vector2i = _cell_index(to + dir.rotated(-PI/4) * cell_size * 0.5)
 	proximity.merge(grid.get(fwd))
 	proximity.merge(grid.get(lft))
 	proximity.merge(grid.get(rgt))
 	
-	var result = proximity.query(to)
+	var result : SDF.Query = proximity.query(to)
 	#proximity._debug_draw(Color.STEEL_BLUE)
 		
 	return result
 
-func load_elements():
-	for child in get_children():
+func load_elements() -> void:
+	for child : Node in get_children():
 		if child is not SDFElement: continue
-		var element = child as SDFElement
+		var element : SDFElement = child as SDFElement
 		
 		element.setup()
 		var bounds : Rect2    = element.bounds()
 		var start  : Vector2i = _cell_index(bounds.position)
 		var end    : Vector2i = _cell_index(bounds.position + bounds.size)
 		
-		for x in range(start.x, end.x+1):
-			for y in range(start.y, end.y+1):
+		for x : int in range(start.x, end.x+1):
+			for y : int in range(start.y, end.y+1):
 				var idx : Vector2i = Vector2i(x, y)
 				if idx not in grid:
 					grid[idx] = SDFCell.new()
@@ -65,15 +65,15 @@ class SDFCell extends Structure:
 	
 	var location : Vector2
 	
-	func setup():
+	func setup() -> void:
 		elements = {}
-		var cell_size = 1.0 * SDFScene.Main.cell_size
-		var size = Vector2(cell_size, cell_size)
+		var cell_size : float = 1.0 * SDFScene.Main.cell_size
+		var size : Vector2 = Vector2(cell_size, cell_size)
 		aabb = Rect2(location - size * 0.5, size)
 		
-	func insert(element : SDFElement): elements.set(element, true)
+	func insert(element : SDFElement) -> void: elements.set(element, true)
 	
-	func merge(other : SDFCell):
+	func merge(other : SDFCell) -> void:
 		if other == null: return
 		elements.merge(other.elements)
 		aabb = aabb.merge(other.aabb)

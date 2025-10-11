@@ -5,6 +5,6 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_2t68l")
-shader_parameter/colour = Color(0.8600167, 0.6641788, 0.24266443, 1)
-shader_parameter/shadow = Color(0.8186212, 0.35381877, 0.01560938, 1)
-shader_parameter/light_direction = Vector3(0.25, 4.78, 0)
+shader_parameter/colour = Color(0.883825, 0.6496612, 0.15637994, 1)
+shader_parameter/shadow = Color(0.9414091, 0.41581115, 0.044187732, 1)
+shader_parameter/light_direction = Vector3(0.1, 2, 0)

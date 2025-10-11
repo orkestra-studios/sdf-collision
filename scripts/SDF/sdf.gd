@@ -21,8 +21,8 @@ static func translate(position : Vector2, offset : Vector2) -> Vector2:
 	return position - offset
 
 static func rotate(position : Vector2, angle : float) -> Vector2:
-	var sin_a = sin(-angle)
-	var cos_a = cos(-angle)
+	var sin_a : float = sin(-angle)
+	var cos_a : float = cos(-angle)
 	return Vector2(
 		position.x * cos_a + position.y * sin_a,
 		position.y * cos_a - position.x * sin_a
@@ -32,9 +32,9 @@ static func scale(position : Vector2, factor : float) -> Vector2:
 	return position / factor
 	
 static func normal(pos: Vector2, element : SDFElement, eps: float = 0.01) -> Vector2:
-	var dx = element.query(pos + Vector2(eps, 0)).distance - element.query(pos - Vector2(eps, 0)).distance
-	var dy = element.query(pos + Vector2(0, eps)).distance - element.query(pos - Vector2(0, eps)).distance
-	var n = Vector2(dx, dy)
+	var dx : float = element.query(pos + Vector2(eps, 0)).distance - element.query(pos - Vector2(eps, 0)).distance
+	var dy : float = element.query(pos + Vector2(0, eps)).distance - element.query(pos - Vector2(0, eps)).distance
+	var n : Vector2 = Vector2(dx, dy)
 	return n.normalized()
 
 class Query:
@@ -45,7 +45,7 @@ class Query:
 	
 	static var NONE : Query = new()
 	
-	func _init(_distance : float = INF, _element : SDFElement = null, _count = 0):
+	func _init(_distance : float = INF, _element : SDFElement = null, _count : int = 0) -> void:
 		element  = _element
 		distance = _distance
 		count = _count

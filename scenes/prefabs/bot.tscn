@@ -23,8 +23,8 @@ mesh = ExtResource("1_4bloa")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_ysle8")
 script = ExtResource("3_8rbty")
-radius = 0.5
 speed = 3.5
+radius = 0.5
 
 [node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenNotifier3D" parent="."]
 

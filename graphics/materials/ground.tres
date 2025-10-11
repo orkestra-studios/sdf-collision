@@ -5,6 +5,6 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_joous")
-shader_parameter/colour = Color(0.6632723, 0.7486335, 0.3629011, 1)
-shader_parameter/shadow = Color(0.24229014, 0.49129212, 0.4026506, 1)
+shader_parameter/colour = Color(0.5612646, 0.7570188, 0.34629238, 1)
+shader_parameter/shadow = Color(0.23590747, 0.47866547, 0.5014714, 1)
 shader_parameter/light_direction = Vector3(0, 1, 0)

@@ -45,7 +45,7 @@ vec3 euler_rotation(vec3 input, vec3 rotation) {
 }
 
 vec3 get_sun_direction(vec3 pos) {
-	vec3 blue = vec3(0.00000, 0.00000, 1.00000);
+	vec3 blue = vec3(1.0, 0.0, 1.0);
 	vec3 diff = pos - blue;
 	vec3 loc = pos - diff;
 	vec3 dir = light_direction;

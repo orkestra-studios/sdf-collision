@@ -3,12 +3,12 @@ class_name Grid extends RefCounted
 static var cell_size : int = 4
 var data : Dictionary[Vector2i, Cell]
 
-func _init(size : int):
+func _init(size : int) -> void:
 	cell_size = size
 	data = {}
 
 func get_cell(location : Vector2) -> Cell:
-	var idx = index(location)
+	var idx : Vector2i = index(location)
 	return get_cell_at(idx, true)
 	
 func get_cell_at(idx : Vector2i, create : bool = false) -> Cell:
